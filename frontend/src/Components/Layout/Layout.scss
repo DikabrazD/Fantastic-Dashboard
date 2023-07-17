@@ -1,0 +1,61 @@
+@import '../../assets/styles/variables.scss';
+
+.layout {
+    display: flex;
+    &-nav {
+        display: flex;
+        flex-direction: column;
+        width: 15%;
+        height: 100vh;
+        padding: 30px;
+        background-color: $main-gray;
+        &-logo {
+            width: 100px;
+            margin-bottom: 50px;
+            margin-left: 15px;
+        }
+        &-routes {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            &-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 15px;
+                border-radius: 10px;
+                transition: all 0.15s;
+                &-icon {
+                    width: 25px;
+                    height: 25px;
+                }
+                &:hover {
+                    background-color: $second-gray;
+                    color: $main-green;
+                }
+            }
+        }
+        &-logout {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.15s;
+            &-icon {
+                width: 25px;
+                height: 25px;
+            }
+            &:hover {
+                background-color: $second-gray;
+                color: $main-green;
+            }
+        }
+    }
+    &-main {
+        width: 85%;
+        padding: 20px;
+        background-color: black;
+    }
+}
