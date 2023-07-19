@@ -36,7 +36,6 @@ const Layout = ({ children }: PropsWithChildren) => {
                         <span>Workers</span>
                     </Link>
                 </ul>
-
                 <Link to={'/auth'} className='layout-nav-logout'>
                     <div className='layout-nav-logout-icon'>
                         <FaSignOutAlt className='image' />
@@ -44,7 +43,7 @@ const Layout = ({ children }: PropsWithChildren) => {
                     <span>Log Out</span>
                 </Link>
             </nav>
-            <div className='layout-main'>{children}122</div>
+            <div className='layout-main'>{children}</div>
         </div>
     )
 }
