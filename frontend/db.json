@@ -1,0 +1,62 @@
+{
+    "courses": [
+        {
+            "id": 0,
+            "name": "Curs de Engleză: Beginner (A1)",
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Beginner-Incepatori-A1_result.webp"
+        },
+        {
+            "id": 1,
+            "name": "Curs de Engleză: Elementary (A2)",
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Elementary-A2_result.webp"
+        },
+        {
+            "id": 2,
+            "name": "Curs de Engleză: Pre-Intermediate (B1)",
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Pre-Intermediate-B1_result.webp"
+        },
+        {
+            "id": 3,
+            "name": "Curs de Engleză: Intermediate (B1-B2)",
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Intermediate-B1-B2_result.webp"
+        },
+        {
+            "id": 4,
+            "name": "Curs de Engleză: Intermediate Plus",
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Intermediate-Plus_result.webp"
+        },
+        {
+            "id": 5,
+            "name": "Curs de Engleză: Upper Intermediate (B2)",
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Upper-Intermediate-B2_result.webp"
+        },
+        {
+            "id": 6,
+            "name": "Curs de Engleză: Advanced (C1)",
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Advanced-C1_result.webp"
+        },
+        {
+            "id": 7,
+            "name": "Pregătire pentru BAC la Engleză",
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-engleza-pentru-Adolescenti_result.webp"
+        }
+    ],
+
+    "categories": [
+        {
+            "id": 0,
+            "name": "Toate",
+            "courses": [1, 0, 2, 3, 4, 5, 6, 7]
+        },
+        {
+            "id": 1,
+            "name": "Engleză conversațională adulți",
+            "courses": [0, 1, 2]
+        },
+        {
+            "id": 2,
+            "name": "Elevi",
+            "courses": [7]
+        }
+    ]
+}

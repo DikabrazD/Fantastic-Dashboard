@@ -55,7 +55,9 @@
     }
     &-main {
         width: 85%;
-        padding: 20px;
+        height: 100vh;
         background-color: black;
+        overflow-y: scroll;
+        padding: 20px;
     }
 }
