@@ -1,21 +1,4 @@
-@import '../../assets/styles/variables.scss';
-
-.categories {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    &-item {
-        color: white;
-        &-title {
-            padding: 20px;
-            margin: 10px 0;
-            border: 2px solid $main-gray;
-            border-radius: $border-radius;
-            font-size: 24px;
-            width: 100%;
-        }
-    }
-}
+@import '../../../../assets/styles/variables.scss';
 
 .courses {
     display: grid;
@@ -39,4 +22,9 @@
             background-color: $second-gray;
         }
     }
+}
+
+.dragOver {
+    color: $main-green;
+    background-color: $second-gray;
 }
