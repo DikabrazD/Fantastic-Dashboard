@@ -1,0 +1,25 @@
+@import '../../assets/styles/variables.scss';
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 7px;
+    border: 0;
+    background-color: $main-gray;
+    border-radius: $border-radius;
+    color: white;
+    transition: all 0.15s;
+    &-red:hover {
+        background-color: #f65606;
+    }
+    &-green:hover {
+        background-color: $main-green;
+        color: black;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}

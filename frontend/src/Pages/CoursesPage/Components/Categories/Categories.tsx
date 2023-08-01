@@ -64,6 +64,36 @@ const Categories = () => {
         setCategories(x)
     }
 
+    const deleteAllCourses = (course: number) => {
+        let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
+
+        newCategories = newCategories.map((item) => {
+            if (item.courses.includes(course)) {
+                const newItem = { ...item }
+                newItem.courses = newItem.courses.filter((item) => item !== course)
+                return newItem
+            } else return item
+        })
+
+        setCategories(newCategories)
+    }
+    const changeCourse = (course: number, category: number) => {
+        console.log('1')
+    }
+    const deleteCourse = (course: number, category: number) => {
+        let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
+
+        newCategories = newCategories.map((item) => {
+            if (item.id === category) {
+                const newItem = { ...item }
+                newItem.courses = newItem.courses.filter((item) => item !== course)
+                return newItem
+            } else return item
+        })
+
+        setCategories(newCategories)
+    }
+
     return (
         <ul className='categories'>
             {categories.map((item) => {
@@ -81,6 +111,9 @@ const Categories = () => {
                             categories={categories}
                             categoriesChange={(x) => changeCategories(x)}
                             currentCoursesChange={(x) => changeCurrentCourse(x)}
+                            deleteAllCourses={(x) => deleteAllCourses(x)}
+                            changeCourse={(x) => changeCourse(x, item.id)}
+                            deleteCourse={(x) => deleteCourse(x, item.id)}
                         />
                     </li>
                 )

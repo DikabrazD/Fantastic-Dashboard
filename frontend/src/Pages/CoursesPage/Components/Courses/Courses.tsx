@@ -1,17 +1,23 @@
 import { CourseInterface, CoursesComponentInterface } from './CoursesInterface'
 import { CategoryInterface } from '../Categories/CategoriesInterface'
 import { useEffect, useState } from 'react'
+import { FaTrash, FaEdit, FaTimes } from 'react-icons/fa'
 
 import axios from 'axios'
 
 import './Courses.scss'
+import Button from 'src/Components/Button/Button'
+import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
 
 const Courses = ({
     currentCourse,
     category,
     categories,
     categoriesChange,
-    currentCoursesChange
+    currentCoursesChange,
+    deleteCourse,
+    changeCourse,
+    deleteAllCourses
 }: CoursesComponentInterface) => {
     const [courses, setCourses] = useState<CourseInterface[]>([])
     const [isOver, setIsOver] = useState<number>()
@@ -95,6 +101,23 @@ const Courses = ({
                             key={item.id}
                             className={`courses-item ${isOver === item.id ? 'dragOver' : ''}`}
                         >
+                            <div className='courses-item-actions'>
+                                <Button
+                                    type={ButtonTypes.RED}
+                                    icon={<FaTrash />}
+                                    onClick={() => deleteAllCourses(item.id)}
+                                />
+                                <Button
+                                    type={ButtonTypes.GREEN}
+                                    icon={<FaEdit />}
+                                    onClick={() => changeCourse(item.id)}
+                                />
+                                <Button
+                                    type={ButtonTypes.RED}
+                                    icon={<FaTimes />}
+                                    onClick={() => deleteCourse(item.id)}
+                                />
+                            </div>
                             <h2 className='courses-item-title'>{item.name}</h2>
                             <div className='courses-item-image'>
                                 <img className='image' src={item.img} alt='course' />

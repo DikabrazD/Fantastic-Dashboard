@@ -1,5 +1,14 @@
 @import '../../../../assets/styles/variables.scss';
 
+@mixin actions-style {
+    width: 30px;
+    height: 30px;
+    padding: 7px;
+    background-color: $main-gray;
+    border-radius: $border-radius;
+    color: white;
+}
+
 .courses {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -9,6 +18,14 @@
         padding: 20px;
         background-color: $main-gray;
         border-radius: $border-radius;
+        transition: all 0.15s;
+        &-actions {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
         &-title {
             font-size: 20px;
             margin-bottom: 20px;
