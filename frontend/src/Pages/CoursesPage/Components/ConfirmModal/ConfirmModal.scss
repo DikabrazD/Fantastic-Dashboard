@@ -1,0 +1,13 @@
+.confirmModal {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    &-title {
+        font-size: 20px;
+    }
+    &-buttons {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+}

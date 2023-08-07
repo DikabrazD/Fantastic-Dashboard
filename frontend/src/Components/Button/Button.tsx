@@ -2,7 +2,7 @@ import { ButtonInterface, ButtonTypes } from './ButtonInterface'
 
 import './Button.scss'
 
-const Button = ({ type, icon, onClick }: ButtonInterface) => {
+const Button = ({ type, icon, text, onClick }: ButtonInterface) => {
     const buttonClass = (() => {
         switch (type) {
             case ButtonTypes.RED:
@@ -20,7 +20,8 @@ const Button = ({ type, icon, onClick }: ButtonInterface) => {
 
     return (
         <button type='button' className={`button ${buttonClass}`} onClick={onClickHandler}>
-            {icon}
+            {icon ? <div className='button-icon'>{icon}</div> : ''}
+            {text ? <span className='button-text'>{text}</span> : ''}
         </button>
     )
 }

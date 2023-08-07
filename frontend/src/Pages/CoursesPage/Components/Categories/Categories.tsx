@@ -25,6 +25,10 @@ const Categories = () => {
         fetchData()
     }, [])
 
+    const changeCurrentCourse = (x: number) => {
+        setCurrentCourse(x)
+    }
+
     //Drag and drop logica categoriei
     const dragOverCategoryHandler = (e: React.DragEvent<HTMLLIElement>) => {
         e.preventDefault()
@@ -44,13 +48,9 @@ const Categories = () => {
         e.preventDefault()
     }
 
-    const changeCurrentCourse = (x: number) => {
-        setCurrentCourse(x)
-    }
-
     //CRUD
 
-    const changeCategories = async (x: CategoryInterface[]) => {
+    const changeCategories = async (course: number, categoryID: number) => {
         // await axios
         //     .put<CategoryInterface[]>('http://localhost:3000/categories', x)
         //     .then((res) => {
@@ -61,16 +61,37 @@ const Categories = () => {
         //         console.log(err)
         //     })
 
-        setCategories(x)
-    }
+        let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
+        newCategories = newCategories.map((item) => {
+            // Cautam categoria in care a fost facut drop
+            if (item.id === categoryID && currentCourse !== undefined) {
+                // Cautam indexurile la cursurilor
+                const courseIndex = item.courses.indexOf(course)
+                const currentIndex = item.courses.indexOf(currentCourse)
+                //Daca in categorie nu este currentCourse  si drop-ul a fost facut peste course
+                //atunci adaugam currentCourse in fata la cela course
+                if (currentIndex === -1) {
+                    item.courses.splice(courseIndex, 0, currentCourse)
+                }
+                //Daca in categorie am gasit currentCourse
+                //atunci stergem currentCourse de pe index vechi si currentCourse il punem in fata course-ului
+                else {
+                    item.courses.splice(currentIndex, 1)
+                    item.courses.splice(courseIndex, 0, currentCourse)
+                }
+                return item
+            } else return item
+        })
 
-    const deleteAllCourses = (course: number) => {
+        setCategories(newCategories)
+    }
+    const deleteAllCourses = (x: number) => {
         let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
 
         newCategories = newCategories.map((item) => {
-            if (item.courses.includes(course)) {
+            if (item.courses.includes(x)) {
                 const newItem = { ...item }
-                newItem.courses = newItem.courses.filter((item) => item !== course)
+                newItem.courses = newItem.courses.filter((item) => item !== x)
                 return newItem
             } else return item
         })
@@ -83,10 +104,15 @@ const Categories = () => {
     const deleteCourse = (course: number, category: number) => {
         let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
 
+        console.log(course, category)
+
         newCategories = newCategories.map((item) => {
             if (item.id === category) {
                 const newItem = { ...item }
-                newItem.courses = newItem.courses.filter((item) => item !== course)
+                console.log(newItem)
+                newItem.courses = newItem.courses.filter((item) => {
+                    return item !== course
+                })
                 return newItem
             } else return item
         })
@@ -106,10 +132,8 @@ const Categories = () => {
                     >
                         <h2 className='categories-item-title'>{item.name}</h2>
                         <Courses
-                            currentCourse={currentCourse}
                             category={item}
-                            categories={categories}
-                            categoriesChange={(x) => changeCategories(x)}
+                            categoriesChange={(x) => changeCategories(x, item.id)}
                             currentCoursesChange={(x) => changeCurrentCourse(x)}
                             deleteAllCourses={(x) => deleteAllCourses(x)}
                             changeCourse={(x) => changeCourse(x, item.id)}

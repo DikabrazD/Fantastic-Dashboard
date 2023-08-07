@@ -1,5 +1,4 @@
 import { CourseInterface, CoursesComponentInterface } from './CoursesInterface'
-import { CategoryInterface } from '../Categories/CategoriesInterface'
 import { useEffect, useState } from 'react'
 import { FaTrash, FaEdit, FaTimes } from 'react-icons/fa'
 
@@ -8,11 +7,10 @@ import axios from 'axios'
 import './Courses.scss'
 import Button from 'src/Components/Button/Button'
 import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
+import ConfirmModal from '../ConfirmModal/ConfirmModal'
 
 const Courses = ({
-    currentCourse,
     category,
-    categories,
     categoriesChange,
     currentCoursesChange,
     deleteCourse,
@@ -21,6 +19,9 @@ const Courses = ({
 }: CoursesComponentInterface) => {
     const [courses, setCourses] = useState<CourseInterface[]>([])
     const [isOver, setIsOver] = useState<number>()
+    const [isOpenDeleteAll, setIsOpenDeleteAll] = useState<boolean>(false)
+    const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
+    const [deletedCourse, setDeletedCourse] = useState<number>(0)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,6 +37,32 @@ const Courses = ({
 
         fetchData()
     }, [])
+    //Modal logica
+
+    const openDeleteAll = (x: number) => {
+        setDeletedCourse(x)
+        setIsOpenDeleteAll(true)
+    }
+    const openDelete = (x: number) => {
+        setDeletedCourse(x)
+        setIsOpenDelete(true)
+    }
+    const closeDeleteAll = () => {
+        setIsOpenDeleteAll(false)
+    }
+    const closeDelete = () => {
+        setIsOpenDelete(false)
+    }
+
+    const confirmDeleteAll = (x: number) => {
+        closeDeleteAll()
+        deleteAllCourses(x)
+    }
+
+    const confirmDelete = (x: number) => {
+        closeDelete()
+        deleteCourse(x)
+    }
 
     //Drag and Drop logica cursurilor
 
@@ -54,78 +81,75 @@ const Courses = ({
         e.preventDefault()
     }
     const dragDropHandler = (e: React.DragEvent<HTMLLIElement>, courseID: number) => {
-        let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
-        newCategories = newCategories.map((item) => {
-            // Cautam categoria in care a fost facut drop
-            if (item.id === category.id && currentCourse !== undefined) {
-                // Cautam indexurile la cursurilor
-                const courseIndex = item.courses.indexOf(courseID)
-                const currentIndex = item.courses.indexOf(currentCourse)
-                //Daca in categorie nu este currentCourse  si drop-ul a fost facut peste course
-                //atunci adaugam currentCourse in fata la cela course
-                if (currentIndex === -1) {
-                    item.courses.splice(courseIndex, 0, currentCourse)
-                }
-                //Daca in categorie am gasit currentCourse
-                //atunci stergem currentCourse de pe index vechi si currentCourse il punem in fata course-ului
-                else {
-                    item.courses.splice(currentIndex, 1)
-                    item.courses.splice(courseIndex, 0, currentCourse)
-                }
-                return item
-            } else return item
-        })
-
         setIsOver(undefined)
-        categoriesChange(newCategories)
+        categoriesChange(courseID)
 
         e.stopPropagation()
         e.preventDefault()
     }
 
     return (
-        <ul className='courses'>
-            {/* Afiseaza numai cursurile care se afa in array-ul categories.courses si sorteaza dupa oridnea acestuia */}
-            {courses
-                .filter((itemCourse) => category.courses.includes(itemCourse.id))
-                .sort((a, b) => category.courses.indexOf(a.id) - category.courses.indexOf(b.id))
-                .map((item) => {
-                    return (
-                        <li
-                            onDragStart={(e) => dragStartHandler(e, item)}
-                            onDragLeave={(e) => dragLeaveHandler(e, item.id)}
-                            onDragEnd={(e) => dragEndHandler(e)}
-                            onDragOver={(e) => dragOverHandler(e, item.id)}
-                            onDrop={(e) => dragDropHandler(e, item.id)}
-                            draggable={true}
-                            key={item.id}
-                            className={`courses-item ${isOver === item.id ? 'dragOver' : ''}`}
-                        >
-                            <div className='courses-item-actions'>
-                                <Button
-                                    type={ButtonTypes.RED}
-                                    icon={<FaTrash />}
-                                    onClick={() => deleteAllCourses(item.id)}
-                                />
-                                <Button
-                                    type={ButtonTypes.GREEN}
-                                    icon={<FaEdit />}
-                                    onClick={() => changeCourse(item.id)}
-                                />
-                                <Button
-                                    type={ButtonTypes.RED}
-                                    icon={<FaTimes />}
-                                    onClick={() => deleteCourse(item.id)}
-                                />
-                            </div>
-                            <h2 className='courses-item-title'>{item.name}</h2>
-                            <div className='courses-item-image'>
-                                <img className='image' src={item.img} alt='course' />
-                            </div>
-                        </li>
-                    )
-                })}
-        </ul>
+        <>
+            <ul className='courses'>
+                {/* Afiseaza numai cursurile care se afa in array-ul categories.courses si sorteaza dupa oridnea acestuia */}
+                {courses
+                    .filter((itemCourse) => category.courses.includes(itemCourse.id))
+                    .sort((a, b) => category.courses.indexOf(a.id) - category.courses.indexOf(b.id))
+                    .map((item) => {
+                        return (
+                            <li
+                                onDragStart={(e) => dragStartHandler(e, item)}
+                                onDragLeave={(e) => dragLeaveHandler(e, item.id)}
+                                onDragEnd={(e) => dragEndHandler(e)}
+                                onDragOver={(e) => dragOverHandler(e, item.id)}
+                                onDrop={(e) => dragDropHandler(e, item.id)}
+                                draggable={true}
+                                key={item.id}
+                                className={`courses-item ${isOver === item.id ? 'dragOver' : ''}`}
+                            >
+                                <div className='courses-item-actions'>
+                                    <Button
+                                        type={ButtonTypes.RED}
+                                        icon={<FaTrash className='image' />}
+                                        onClick={() => openDeleteAll(item.id)}
+                                    />
+                                    <Button
+                                        type={ButtonTypes.GREEN}
+                                        icon={<FaEdit className='image' />}
+                                        onClick={() => changeCourse(item.id)}
+                                    />
+                                    <Button
+                                        type={ButtonTypes.RED}
+                                        icon={<FaTimes className='image' />}
+                                        onClick={() => openDelete(item.id)}
+                                    />
+                                </div>
+                                <h2 className='courses-item-title'>{item.name}</h2>
+                                <div className='courses-item-image'>
+                                    <img className='image' src={item.img} alt='course' />
+                                </div>
+                            </li>
+                        )
+                    })}
+            </ul>
+
+            {isOpenDeleteAll && (
+                <ConfirmModal
+                    text='Cursul va fi șters din toate categoriile,nu se va mai putea restabili.Doriți să efectuați operațiunea?'
+                    confirmed={() => confirmDeleteAll(deletedCourse)}
+                    declined={() => closeDeleteAll()}
+                    closeModal={() => closeDeleteAll()}
+                />
+            )}
+            {isOpenDelete && (
+                <ConfirmModal
+                    text='Cursul va fi șters din această.Doriți să efectuați operațiunea?'
+                    confirmed={() => confirmDelete(deletedCourse)}
+                    declined={() => closeDelete()}
+                    closeModal={() => closeDelete()}
+                />
+            )}
+        </>
     )
 }
 

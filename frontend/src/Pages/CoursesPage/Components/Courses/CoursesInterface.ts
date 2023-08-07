@@ -1,10 +1,8 @@
 import { CategoryInterface } from '../Categories/CategoriesInterface'
 
 export interface CoursesComponentInterface {
-    currentCourse: number | undefined
     category: CategoryInterface
-    categories: CategoryInterface[]
-    categoriesChange: (x: CategoryInterface[]) => void
+    categoriesChange: (x: number) => void
     currentCoursesChange: (x: number) => void
     deleteCourse: (x: number) => void
     changeCourse: (x: number) => void

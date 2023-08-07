@@ -2,7 +2,8 @@ import { ReactNode } from 'react'
 
 export interface ButtonInterface {
     type: ButtonTypes
-    icon: ReactNode
+    icon?: ReactNode
+    text?: string
     onClick: () => void
 }
 
