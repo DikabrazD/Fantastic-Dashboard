@@ -1,0 +1,59 @@
+@import '../../../../assets/styles/variables.scss';
+
+.chips {
+    &-title {
+        margin-bottom: 10px;
+    }
+    &-list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: black;
+            background-color: #e6ee47;
+            border-radius: $border-radius;
+            font-size: 14px;
+            padding: 6px;
+            &-image {
+                cursor: pointer;
+                width: 15px;
+                height: 15px;
+                transition: all 0.15s;
+                &:hover {
+                    color: red;
+                }
+            }
+        }
+        &-item:nth-child(2n) {
+            background-color: #f65606;
+            .chips-list-item-image:hover {
+                color: white;
+            }
+        }
+        &-item:nth-child(3n) {
+            background-color: $main-green;
+        }
+        &-item:nth-child(4n) {
+            background-color: #b8bcc5;
+            .chips-list-item-image:hover {
+                color: red;
+            }
+        }
+    }
+    &-modal {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        gap: 10px;
+        &-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    }
+}

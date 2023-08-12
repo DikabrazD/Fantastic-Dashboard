@@ -5,10 +5,13 @@ import axios from 'axios'
 import Courses from '../Courses/Courses'
 
 import './Categories.scss'
+import { generatePath, useNavigate } from 'react-router-dom'
+import { RouterNames } from 'src/router'
 
 const Categories = () => {
     const [categories, setCategories] = useState<CategoryInterface[]>([])
     const [currentCourse, setCurrentCourse] = useState<number>()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -98,18 +101,15 @@ const Categories = () => {
 
         setCategories(newCategories)
     }
-    const changeCourse = (course: number, category: number) => {
-        console.log('1')
+    const changeCourse = (course: number) => {
+        navigate(generatePath(RouterNames.COURSEEDIT, { id: String(course) }))
     }
     const deleteCourse = (course: number, category: number) => {
         let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
 
-        console.log(course, category)
-
         newCategories = newCategories.map((item) => {
             if (item.id === category) {
                 const newItem = { ...item }
-                console.log(newItem)
                 newItem.courses = newItem.courses.filter((item) => {
                     return item !== course
                 })
@@ -136,7 +136,7 @@ const Categories = () => {
                             categoriesChange={(x) => changeCategories(x, item.id)}
                             currentCoursesChange={(x) => changeCurrentCourse(x)}
                             deleteAllCourses={(x) => deleteAllCourses(x)}
-                            changeCourse={(x) => changeCourse(x, item.id)}
+                            changeCourse={(x) => changeCourse(x)}
                             deleteCourse={(x) => deleteCourse(x, item.id)}
                         />
                     </li>

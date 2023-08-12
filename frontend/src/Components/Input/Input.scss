@@ -1,0 +1,18 @@
+@import '../../assets/styles/variables.scss';
+
+.input {
+    &-info {
+        color: $main-green;
+    }
+}
+
+input[type='text'] {
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+    color: white;
+    border-bottom: 2px solid;
+    border-color: $second-gray;
+    background-color: transparent;
+    outline: none;
+}

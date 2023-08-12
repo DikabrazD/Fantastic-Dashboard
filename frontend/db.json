@@ -41,6 +41,55 @@
             "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-engleza-pentru-Adolescenti_result.webp"
         }
     ],
+    "coursesDetails": [
+        {
+            "id": 0,
+            "name": "Curs de Engleză: Beginner (A1)",
+            "price": 85,
+            "number_lectures": 45,
+            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Beginner-Incepatori-A1_result.webp",
+            "info": {
+                "main": {
+                    "text": "Cursul de Engleză Beginner A1 (Începător) este destinat celor care nu cunosc deloc Engleza, sau o cunosc foarte puțin,dar nu pot formula propozițiile (nici măcar cele simple) corect. La acest curs vei învața:",
+                    "skills": ["Engleza practică", "Bazele pronunţiei", "Bazele gramaticii", "Comunicare"]
+                },
+                "details": [
+                    {
+                        "id": 0,
+                        "name": "Ce vei învăța la Cursul de Engleză - Beginner (A1)?",
+                        "sections": [
+                            {
+                                "id": 0,
+                                "type": "text",
+                                "text": "_Pentru început, ținem să menționăm_ că vei învăța lucrurile pe care toți și le asociază cu nivelul Începător:"
+                            },
+                            {
+                                "id": 1,
+                                "type": "skills",
+                                "skills": [
+                                    "alfabetul",
+                                    "numerele",
+                                    "țările",
+                                    "formulele de salut",
+                                    "cuvintele simple, etc"
+                                ]
+                            },
+                            {
+                                "id": 2,
+                                "type": "text",
+                                "text": "Important este că nu vei învăța DOAR acestea. Aceste lucruri le înveți în primele lecții, plus la toate astea, vei învăța alte astepecte mult mai importante gen pronunțare, gramatică, ascultare, citire și comunicare."
+                            }
+                        ]
+                    },
+                    {
+                        "id": 1,
+                        "name": "Engleza practică",
+                        "sections": []
+                    }
+                ]
+            }
+        }
+    ],
 
     "categories": [
         {
