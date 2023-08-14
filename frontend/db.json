@@ -84,7 +84,24 @@
                     {
                         "id": 1,
                         "name": "Engleza practică",
-                        "sections": []
+                        "sections": [
+                            {
+                                "id": 0,
+                                "type": "text",
+                                "text": "Programa cursului de engleză Beginner A1 (Începător) pe care o folosim noi (English File, Beginner, third edition) conține cinci module dedicate Englezei practice. Aceasta înseamnă că vei învăța cum să te descurci în diferite situații gen: cum faci cunoștință cu cineva în Engleză, cum comanzi ceva în restaurant, cum vorbești cu recepționistul de la hotel, cum spui ce oră este, cum vorbești despre orașul tău, etc. Toate aceste le înveți folosind materialele video și audio filmate la Londra și New York cu persoanje de naționalitate engleză și americană."
+                            }
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "name": "Engleza practică",
+                        "sections": [
+                            {
+                                "id": 0,
+                                "type": "text",
+                                "text": "Programa cursului de engleză Beginner A1 (Începător) pe care o folosim noi (English File, Beginner, third edition) conține cinci module dedicate Englezei practice. Aceasta înseamnă că vei învăța cum să te descurci în diferite situații gen: cum faci cunoștință cu cineva în Engleză, cum comanzi ceva în restaurant, cum vorbești cu recepționistul de la hotel, cum spui ce oră este, cum vorbești despre orașul tău, etc. Toate aceste le înveți folosind materialele video și audio filmate la Londra și New York cu persoanje de naționalitate engleză și americană."
+                            }
+                        ]
                     }
                 ]
             }

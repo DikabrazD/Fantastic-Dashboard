@@ -9,5 +9,7 @@ export interface ButtonInterface {
 
 export enum ButtonTypes {
     RED = 'RED',
-    GREEN = 'GREEN'
+    GREEN = 'GREEN',
+    REDSOLID = 'REDSOLID',
+    GREENSOLID = 'GREENSOLID'
 }

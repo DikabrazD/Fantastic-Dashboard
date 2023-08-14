@@ -1,0 +1,39 @@
+@import '../../../../assets/styles/variables.scss';
+
+.details {
+    display: flex;
+    flex-direction: column;
+    &-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        &-item {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            padding: 20px;
+            border-radius: $border-radius;
+            background-color: rgba(0, 0, 0, 0.4);
+            &-deleteButton {
+                align-self: flex-end;
+            }
+            &-section {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                &-skills h2 {
+                    color: $main-green;
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}

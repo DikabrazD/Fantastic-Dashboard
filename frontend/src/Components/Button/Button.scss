@@ -22,6 +22,21 @@
         background-color: $main-green;
         color: black;
     }
+    &-redSolid {
+        background-color: rgba(246, 86, 6, 0.8);
+        color: black;
+    }
+    &-greenSolid {
+        background-color: rgba(55, 197, 195, 0.8);
+        color: black;
+    }
+
+    &-redSolid:hover {
+        background-color: #f65606;
+    }
+    &-greenSolid:hover {
+        background-color: $main-green;
+    }
     &:hover {
         cursor: pointer;
     }

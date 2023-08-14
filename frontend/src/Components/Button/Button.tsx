@@ -9,6 +9,10 @@ const Button = ({ type, icon, text, onClick }: ButtonInterface) => {
                 return 'button-red'
             case ButtonTypes.GREEN:
                 return 'button-green'
+            case ButtonTypes.REDSOLID:
+                return 'button-redSolid'
+            case ButtonTypes.GREENSOLID:
+                return 'button-greenSolid'
         }
     })()
 

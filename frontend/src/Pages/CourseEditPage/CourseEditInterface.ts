@@ -3,13 +3,21 @@ import { CourseInterface } from '../CoursesPage/Components/Courses/CoursesInterf
 interface TextInterface {
     id: number
     type: 'text'
-    text: '_Pentru început, ținem să menționăm_ că vei învăța lucrurile pe care toți și le asociază cu nivelul Începător:'
+    text: string
 }
 
 interface SkillsInterface {
     id: number
     type: 'skills'
-    skills: ['alfabetul', 'numerele', 'țările', 'formulele de salut', 'cuvintele simple, etc']
+    skills: string[]
+}
+
+type Section = SkillsInterface | TextInterface
+
+export interface CourseDetailsInterface {
+    id: number
+    name: string
+    sections: Section[]
 }
 
 export interface CourseEditInterface extends CourseInterface {
@@ -20,12 +28,6 @@ export interface CourseEditInterface extends CourseInterface {
             text: string
             skills: string[]
         }
-        details: [
-            {
-                id: number
-                name: string
-                sections: [TextInterface | SkillsInterface]
-            }
-        ]
+        details: CourseDetailsInterface[]
     }
 }
