@@ -10,7 +10,7 @@ import { RouterNames } from 'src/router'
 
 const Categories = () => {
     const [categories, setCategories] = useState<CategoryInterface[]>([])
-    const [currentCourse, setCurrentCourse] = useState<number>()
+    const [currentCourse, setCurrentCourse] = useState<string>()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const Categories = () => {
         fetchData()
     }, [])
 
-    const changeCurrentCourse = (x: number) => {
+    const changeCurrentCourse = (x: string) => {
         setCurrentCourse(x)
     }
 
@@ -36,9 +36,9 @@ const Categories = () => {
     const dragOverCategoryHandler = (e: React.DragEvent<HTMLLIElement>) => {
         e.preventDefault()
     }
-    const onDropCategoryHandler = (e: React.DragEvent<HTMLLIElement>, categoryID: number) => {
+    const onDropCategoryHandler = (e: React.DragEvent<HTMLLIElement>, categoryID: string) => {
         let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
-        //Daca facem drop peste o categorie si cuurentCourse se include in ea,adaugam currentCourse la urmă
+        //Daca facem drop peste o categorie si cuurentCourse nu se include in ea,adaugam currentCourse la urmă
         newCategories = newCategories.map((item) => {
             if (item.id === categoryID && currentCourse !== undefined && !item.courses.includes(currentCourse)) {
                 item.courses.push(currentCourse)
@@ -53,7 +53,7 @@ const Categories = () => {
 
     //CRUD
 
-    const changeCategories = async (course: number, categoryID: number) => {
+    const changeCategories = async (course: string, categoryID: string) => {
         // await axios
         //     .put<CategoryInterface[]>('http://localhost:3000/categories', x)
         //     .then((res) => {
@@ -88,7 +88,7 @@ const Categories = () => {
 
         setCategories(newCategories)
     }
-    const deleteAllCourses = (x: number) => {
+    const deleteAllCourses = (x: string) => {
         let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
 
         newCategories = newCategories.map((item) => {
@@ -101,10 +101,10 @@ const Categories = () => {
 
         setCategories(newCategories)
     }
-    const changeCourse = (course: number) => {
+    const changeCourse = (course: string) => {
         navigate(generatePath(RouterNames.COURSEEDIT, { id: String(course) }))
     }
-    const deleteCourse = (course: number, category: number) => {
+    const deleteCourse = (course: string, category: string) => {
         let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
 
         newCategories = newCategories.map((item) => {

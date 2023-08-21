@@ -1,128 +1,135 @@
 {
-    "courses": [
-        {
+  "courses": [
+    {
+      "id": 0,
+      "name": "Curs de Engleză: Beginner (A1)",
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Beginner-Incepatori-A1_result.webp"
+    },
+    {
+      "id": 1,
+      "name": "Curs de Engleză: Elementary (A2)",
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Elementary-A2_result.webp"
+    },
+    {
+      "id": 2,
+      "name": "Curs de Engleză: Pre-Intermediate (B1)",
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Pre-Intermediate-B1_result.webp"
+    },
+    {
+      "id": 3,
+      "name": "Curs de Engleză: Intermediate (B1-B2)",
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Intermediate-B1-B2_result.webp"
+    },
+    {
+      "id": 4,
+      "name": "Curs de Engleză: Intermediate Plus",
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Intermediate-Plus_result.webp"
+    },
+    {
+      "id": 5,
+      "name": "Curs de Engleză: Upper Intermediate (B2)",
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Upper-Intermediate-B2_result.webp"
+    },
+    {
+      "id": 6,
+      "name": "Curs de Engleză: Advanced (C1)",
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Advanced-C1_result.webp"
+    },
+    {
+      "id": 7,
+      "name": "Pregătire pentru BAC la Engleză",
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-engleza-pentru-Adolescenti_result.webp"
+    }
+  ],
+  "coursesDetails": [
+    {
+      "id": 0,
+      "name": "Curs de Engleză: Beginner (A1)",
+      "price": 85,
+      "number_lectures": 45,
+      "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Beginner-Incepatori-A1_result.webp",
+      "info": {
+        "main": {
+          "text": "Cursul de Engleză Beginner A1 (Începător) este destinat celor care nu cunosc deloc Engleza, sau o cunosc foarte puțin,dar nu pot formula propozițiile (nici măcar cele simple) corect. La acest curs vei învața:",
+          "skills": [
+            "Bazele pronunţiei",
+            "Bazele gramaticii",
+            "Ceva"
+          ]
+        },
+        "details": [
+          {
             "id": 0,
-            "name": "Curs de Engleză: Beginner (A1)",
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Beginner-Incepatori-A1_result.webp"
-        },
-        {
-            "id": 1,
-            "name": "Curs de Engleză: Elementary (A2)",
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Elementary-A2_result.webp"
-        },
-        {
-            "id": 2,
-            "name": "Curs de Engleză: Pre-Intermediate (B1)",
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Pre-Intermediate-B1_result.webp"
-        },
-        {
-            "id": 3,
-            "name": "Curs de Engleză: Intermediate (B1-B2)",
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Intermediate-B1-B2_result.webp"
-        },
-        {
-            "id": 4,
-            "name": "Curs de Engleză: Intermediate Plus",
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Intermediate-Plus_result.webp"
-        },
-        {
-            "id": 5,
-            "name": "Curs de Engleză: Upper Intermediate (B2)",
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Upper-Intermediate-B2_result.webp"
-        },
-        {
-            "id": 6,
-            "name": "Curs de Engleză: Advanced (C1)",
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Advanced-C1_result.webp"
-        },
-        {
-            "id": 7,
-            "name": "Pregătire pentru BAC la Engleză",
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-engleza-pentru-Adolescenti_result.webp"
-        }
-    ],
-    "coursesDetails": [
-        {
-            "id": 0,
-            "name": "Curs de Engleză: Beginner (A1)",
-            "price": 85,
-            "number_lectures": 45,
-            "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Curs-de-Engleza-Beginner-Incepatori-A1_result.webp",
-            "info": {
-                "main": {
-                    "text": "Cursul de Engleză Beginner A1 (Începător) este destinat celor care nu cunosc deloc Engleza, sau o cunosc foarte puțin,dar nu pot formula propozițiile (nici măcar cele simple) corect. La acest curs vei învața:",
-                    "skills": ["Engleza practică", "Bazele pronunţiei", "Bazele gramaticii", "Comunicare"]
-                },
-                "details": [
-                    {
-                        "id": 0,
-                        "name": "Ce vei învăța la Cursul de Engleză - Beginner (A1)?",
-                        "sections": [
-                            {
-                                "id": 0,
-                                "type": "text",
-                                "text": "_Pentru început, ținem să menționăm_ că vei învăța lucrurile pe care toți și le asociază cu nivelul Începător:"
-                            },
-                            {
-                                "id": 1,
-                                "type": "skills",
-                                "skills": [
-                                    "alfabetul",
-                                    "numerele",
-                                    "țările",
-                                    "formulele de salut",
-                                    "cuvintele simple, etc"
-                                ]
-                            },
-                            {
-                                "id": 2,
-                                "type": "text",
-                                "text": "Important este că nu vei învăța DOAR acestea. Aceste lucruri le înveți în primele lecții, plus la toate astea, vei învăța alte astepecte mult mai importante gen pronunțare, gramatică, ascultare, citire și comunicare."
-                            }
-                        ]
-                    },
-                    {
-                        "id": 1,
-                        "name": "Engleza practică",
-                        "sections": [
-                            {
-                                "id": 0,
-                                "type": "text",
-                                "text": "Programa cursului de engleză Beginner A1 (Începător) pe care o folosim noi (English File, Beginner, third edition) conține cinci module dedicate Englezei practice. Aceasta înseamnă că vei învăța cum să te descurci în diferite situații gen: cum faci cunoștință cu cineva în Engleză, cum comanzi ceva în restaurant, cum vorbești cu recepționistul de la hotel, cum spui ce oră este, cum vorbești despre orașul tău, etc. Toate aceste le înveți folosind materialele video și audio filmate la Londra și New York cu persoanje de naționalitate engleză și americană."
-                            }
-                        ]
-                    },
-                    {
-                        "id": 2,
-                        "name": "Engleza practică",
-                        "sections": [
-                            {
-                                "id": 0,
-                                "type": "text",
-                                "text": "Programa cursului de engleză Beginner A1 (Începător) pe care o folosim noi (English File, Beginner, third edition) conține cinci module dedicate Englezei practice. Aceasta înseamnă că vei învăța cum să te descurci în diferite situații gen: cum faci cunoștință cu cineva în Engleză, cum comanzi ceva în restaurant, cum vorbești cu recepționistul de la hotel, cum spui ce oră este, cum vorbești despre orașul tău, etc. Toate aceste le înveți folosind materialele video și audio filmate la Londra și New York cu persoanje de naționalitate engleză și americană."
-                            }
-                        ]
-                    }
+            "name": "Ce vei învăța la Cursul de Engleză - Beginner (A1)?",
+            "sections": [
+              {
+                "id": 0,
+                "type": "text",
+                "text": "_Pentru început, ținem să menționăm_ că vei învăța lucrurile pe care toți și le asociază cu nivelul Începător:"
+              },
+              {
+                "id": 1,
+                "type": "skills",
+                "skills": [
+                  "alfabetul",
+                  "numerele",
+                  "țările",
+                  "formulele de salut",
+                  "cuvintele simple, etc"
                 ]
-            }
-        }
-    ],
-
-    "categories": [
-        {
-            "id": 0,
-            "name": "Toate",
-            "courses": [1, 0, 2, 3, 4, 5, 6, 7]
-        },
-        {
-            "id": 1,
-            "name": "Engleză conversațională adulți",
-            "courses": [0, 1, 2]
-        },
-        {
+              },
+              {
+                "id": 2,
+                "type": "text",
+                "text": "Important este că nu vei învăța DOAR acestea. Aceste lucruri le înveți în primele lecții, plus la toate astea, vei învăța alte astepecte mult mai importante gen pronunțare, gramatică, ascultare, citire și comunicare."
+              }
+            ]
+          },
+          {
             "id": 2,
-            "name": "Elevi",
-            "courses": [7]
-        }
-    ]
+            "name": "Engleza practică",
+            "sections": [
+              {
+                "id": 0,
+                "type": "text",
+                "text": "Programa cursului de engleză Beginner A1 (Începător) pe care o folosim noi (English File, Beginner, third edition) conține cinci module dedicate Englezei practice. Aceasta înseamnă că vei învăța cum să te descurci în diferite situații gen: cum faci cunoștință cu cineva în Engleză, cum comanzi ceva în restaurant, cum vorbești cu recepționistul de la hotel, cum spui ce oră este, cum vorbești despre orașul tău, etc. Toate aceste le înveți folosind materialele video și audio filmate la Londra și New York cu persoanje de naționalitate engleză și americană."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": 0,
+      "name": "Toate",
+      "courses": [
+        1,
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Engleză conversațională adulți",
+      "courses": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Elevi",
+      "courses": [
+        7
+      ]
+    }
+  ]
 }

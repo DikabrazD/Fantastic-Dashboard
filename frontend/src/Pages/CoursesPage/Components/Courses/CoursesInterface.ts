@@ -2,15 +2,15 @@ import { CategoryInterface } from '../Categories/CategoriesInterface'
 
 export interface CoursesComponentInterface {
     category: CategoryInterface
-    categoriesChange: (x: number) => void
-    currentCoursesChange: (x: number) => void
-    deleteCourse: (x: number) => void
-    changeCourse: (x: number) => void
-    deleteAllCourses: (x: number) => void
+    categoriesChange: (x: string) => void
+    currentCoursesChange: (x: string) => void
+    deleteCourse: (x: string) => void
+    changeCourse: (x: string) => void
+    deleteAllCourses: (x: string) => void
 }
 
 export interface CourseInterface {
-    id: number
+    id: string
     name: string
     img: string
 }

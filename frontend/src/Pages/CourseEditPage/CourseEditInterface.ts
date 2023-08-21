@@ -1,13 +1,13 @@
 import { CourseInterface } from '../CoursesPage/Components/Courses/CoursesInterface'
 
 interface TextInterface {
-    id: number
+    id: string
     type: 'text'
     text: string
 }
 
 interface SkillsInterface {
-    id: number
+    id: string
     type: 'skills'
     skills: string[]
 }
@@ -15,7 +15,7 @@ interface SkillsInterface {
 type Section = SkillsInterface | TextInterface
 
 export interface CourseDetailsInterface {
-    id: number
+    id: string
     name: string
     sections: Section[]
 }

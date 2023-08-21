@@ -18,10 +18,10 @@ const Courses = ({
     deleteAllCourses
 }: CoursesComponentInterface) => {
     const [courses, setCourses] = useState<CourseInterface[]>([])
-    const [isOver, setIsOver] = useState<number>()
+    const [isOver, setIsOver] = useState<string>()
     const [isOpenDeleteAll, setIsOpenDeleteAll] = useState<boolean>(false)
     const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
-    const [deletedCourse, setDeletedCourse] = useState<number>(0)
+    const [deletedCourse, setDeletedCourse] = useState<string>('')
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,11 +39,11 @@ const Courses = ({
     }, [])
     //Modal logica
 
-    const openDeleteAll = (x: number) => {
+    const openDeleteAll = (x: string) => {
         setDeletedCourse(x)
         setIsOpenDeleteAll(true)
     }
-    const openDelete = (x: number) => {
+    const openDelete = (x: string) => {
         setDeletedCourse(x)
         setIsOpenDelete(true)
     }
@@ -54,12 +54,12 @@ const Courses = ({
         setIsOpenDelete(false)
     }
 
-    const confirmDeleteAll = (x: number) => {
+    const confirmDeleteAll = (x: string) => {
         closeDeleteAll()
         deleteAllCourses(x)
     }
 
-    const confirmDelete = (x: number) => {
+    const confirmDelete = (x: string) => {
         closeDelete()
         deleteCourse(x)
     }
@@ -69,18 +69,18 @@ const Courses = ({
     const dragStartHandler = (e: React.DragEvent<HTMLLIElement>, course: CourseInterface) => {
         currentCoursesChange(course.id)
     }
-    const dragLeaveHandler = (e: React.DragEvent<HTMLLIElement>, courseID: number) => {
+    const dragLeaveHandler = (e: React.DragEvent<HTMLLIElement>, courseID: string) => {
         setIsOver(courseID)
     }
     const dragEndHandler = (e: React.DragEvent<HTMLLIElement>) => {
         setIsOver(undefined)
     }
-    const dragOverHandler = (e: React.DragEvent<HTMLLIElement>, courseID: number) => {
+    const dragOverHandler = (e: React.DragEvent<HTMLLIElement>, courseID: string) => {
         setIsOver(courseID)
         e.stopPropagation()
         e.preventDefault()
     }
-    const dragDropHandler = (e: React.DragEvent<HTMLLIElement>, courseID: number) => {
+    const dragDropHandler = (e: React.DragEvent<HTMLLIElement>, courseID: string) => {
         setIsOver(undefined)
         categoriesChange(courseID)
 

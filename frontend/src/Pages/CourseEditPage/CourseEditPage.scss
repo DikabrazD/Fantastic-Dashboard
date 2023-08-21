@@ -11,6 +11,10 @@
 .edit {
     display: flex;
     flex-direction: column;
+    &-saveButton {
+        margin-left: auto;
+        margin-top: 10px;
+    }
     &-wrapper {
         display: flex;
         flex-wrap: wrap;
@@ -21,6 +25,14 @@
             flex-direction: column;
             gap: 10px;
             @include block;
+            &-image {
+                width: 400px;
+                height: 300px;
+                &-title {
+                    color: $main-green;
+                    font-weight: 400;
+                }
+            }
         }
         &-main {
             width: 50%;
