@@ -1,73 +1,26 @@
 import { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { RouterNames } from 'src/router'
 import { CourseEditInterface } from './CourseEditInterface'
 import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
 
 import Breadcrumbs from 'src/Components/Breadcrumbs'
-import Input from 'src/Components/Input'
 import axios from 'axios'
-import Chips from './Components/Chips'
 import Details from './Components/Details'
 import Button from 'src/Components/Button/Button'
 import uuid from 'react-uuid'
 
 import './CourseEditPage.scss'
+import Main from './Components/Main/Main'
+import About from './Components/About/About'
 
 const CourseEditPage = () => {
     const location = useLocation()
+    const navigate = useNavigate()
     const { id } = useParams()
     const formData = new FormData()
 
     const [course, setCourse] = useState<CourseEditInterface>()
-
-    ///Course change logic
-
-    //About
-    const changeName = (x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-
-        newCourse.name = x
-        setCourse(newCourse)
-    }
-
-    const changePrice = (x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-
-        newCourse.price = Number(x.replace(/\D/g, ''))
-        setCourse(newCourse)
-    }
-
-    const changeImage = (x: React.ChangeEvent<HTMLInputElement>) => {
-        if (x.target.files) {
-            formData.append('image', x.target.files[0])
-        }
-    }
-
-    const changeNumberLectures = (x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-
-        newCourse.number_lectures = Number(x.replace(/\D/g, ''))
-        setCourse(newCourse)
-    }
-    //Main
-    const changeMainText = (x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-
-        newCourse.info.main.text = x
-        setCourse(newCourse)
-    }
-    const addSkill = (x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        newCourse.info.main.skills.push(x)
-
-        setCourse(newCourse)
-    }
-    const deleteSkill = (x: number) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        newCourse.info.main.skills.splice(x, 1)
-
-        setCourse(newCourse)
-    }
 
     //Details
     const changeDetailName = (detailIndex: number, x: string) => {
@@ -75,6 +28,21 @@ const CourseEditPage = () => {
         newCourse.info.details[detailIndex].name = x
 
         setCourse(newCourse)
+
+        //Alternative
+        // if (course) {
+        //     setCourse({
+        //         ...course,
+        //         info: {
+        //             ...course.info,
+        //             details: course.info.details.map((item) => {
+        //                 if (item.id === '123') {
+        //                     return { ...item, name: x }
+        //                 } else return item
+        //             })
+        //         }
+        //     })
+        // }
     }
 
     const changeSectionText = (detailIndex: number, sectionIndex: number, x: string) => {
@@ -164,18 +132,30 @@ const CourseEditPage = () => {
             .catch((error) => console.log(error))
     }
 
+    const changeCourse = (x: CourseEditInterface) => {
+        setCourse(x)
+    }
+
+    const changeFormData = (x: File) => {
+        formData.append('image', x)
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             await axios
                 .get<CourseEditInterface[]>(`http://localhost:3000/coursesDetails?id=${id}`)
                 .then((res) => {
-                    setCourse(res.data[0])
+                    if (res.data[0] !== undefined) {
+                        setCourse(res.data[0])
+                    } else {
+                        navigate(RouterNames.ERROR)
+                    }
                 })
                 .catch((error) => console.log(error))
         }
 
         fetchData()
-    }, [id])
+    }, [id, navigate])
 
     return (
         <div className='edit'>
@@ -186,50 +166,22 @@ const CourseEditPage = () => {
             {course && (
                 <form className='edit-wrapper'>
                     <div className='edit-wrapper-about'>
-                        <h2 className='edit-wrapper-about-title'>About</h2>
-                        <div className='edit-wrapper-about-image'>
-                            <h3 className='edit-wrapper-about-image-title'>Image</h3>
-                            <img src={course.img} className='image' alt='course' />
-                        </div>
-                        <input type='file' accept='image/png, image/gif, image/jpeg' onChange={changeImage} />
-                        <Input value={course.name} onChange={(x) => changeName(x)} placeholder='Name' />
-                        <Input value={course.price} onChange={(x) => changePrice(x)} placeholder='Price' />
-                        <Input
-                            value={course.number_lectures}
-                            onChange={(x) => changeNumberLectures(x)}
-                            placeholder='Number Lectures'
-                        />
+                        <About course={course} changeCourse={changeCourse} changeFormData={changeFormData} />
                     </div>
                     <div className='edit-wrapper-main'>
-                        <h2 className='edit-wrapper-main-title'>Main</h2>
-                        <div className='edit-wrapper-main-input'>
-                            <Input
-                                value={course.info.main.text}
-                                onChange={(x) => changeMainText(x)}
-                                placeholder='Text'
-                            />
-                        </div>
-                        <Chips
-                            value={course.info.main.skills}
-                            onAdd={(x) => addSkill(x)}
-                            onDelete={(x) => deleteSkill(x)}
-                        />
+                        <Main course={course} changeCourse={changeCourse} />
                     </div>
                     <div className='edit-wrapper-details'>
                         <Details
                             details={course.info.details}
-                            changeDetailName={(detailIndex, x) => changeDetailName(detailIndex, x)}
-                            changeSectionText={(detailIndex, sectionIndex, x) =>
-                                changeSectionText(detailIndex, sectionIndex, x)
-                            }
-                            addSkill={(detailIndex, sectionIndex, x) => addSectionSkill(detailIndex, sectionIndex, x)}
-                            deleteSkill={(detailIndex, sectionIndex, x) =>
-                                deleteSectionSkill(detailIndex, sectionIndex, x)
-                            }
+                            changeDetailName={changeDetailName}
+                            changeSectionText={changeSectionText}
+                            addSkill={addSectionSkill}
+                            deleteSkill={deleteSectionSkill}
                             addDetail={addDetail}
-                            deleteDetail={(x) => deleteDetail(x)}
-                            addSection={(detailIndex, type) => addSection(detailIndex, type)}
-                            deleteSectin={(detailIndex, sectionIndex) => deleteSection(detailIndex, sectionIndex)}
+                            deleteDetail={deleteDetail}
+                            addSection={addSection}
+                            deleteSectin={deleteSection}
                         />
                     </div>
                 </form>

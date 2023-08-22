@@ -37,10 +37,6 @@
         &-main {
             width: 50%;
             @include block;
-            &-input {
-                width: 100%;
-                margin-bottom: 10px;
-            }
         }
         &-details {
             width: 100%;

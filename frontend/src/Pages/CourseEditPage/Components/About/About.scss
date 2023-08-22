@@ -1,0 +1,14 @@
+@import '../../../../assets/styles/variables.scss';
+
+.about {
+    display: flex;
+    flex-direction: column;
+    &-image {
+        width: 400px;
+        height: 300px;
+        &-title {
+            color: $main-green;
+            font-weight: 400;
+        }
+    }
+}
