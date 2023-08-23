@@ -12,7 +12,7 @@ interface SkillsInterface {
     skills: string[]
 }
 
-type Section = SkillsInterface | TextInterface
+export type Section = SkillsInterface | TextInterface
 
 export interface CourseDetailsInterface {
     id: string

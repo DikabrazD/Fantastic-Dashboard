@@ -1,0 +1,33 @@
+@import '../../../../../../assets/styles/variables.scss';
+
+.sectionDetail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        &-skills h2 {
+            color: $main-green;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        &-deleteButton {
+            margin-top: 10px;
+        }
+    }
+    &-modal {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        &-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    }
+    &-addButton {
+        align-self: flex-end;
+    }
+}
