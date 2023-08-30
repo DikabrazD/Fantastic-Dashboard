@@ -3,6 +3,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { RouterNames } from 'src/router'
 import { CourseEditInterface } from './CourseEditInterface'
 import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
+import { useDispatch } from 'react-redux'
+import { addNotificationAction } from 'src/store/reducers/notificationReducer'
 
 import Breadcrumbs from 'src/Components/Breadcrumbs'
 import axios from 'axios'
@@ -10,6 +12,7 @@ import Main from './Components/Main/Main'
 import About from './Components/About/About'
 import Details from './Components/Details'
 import Button from 'src/Components/Button/Button'
+import uuid from 'react-uuid'
 
 import './CourseEditPage.scss'
 
@@ -21,10 +24,15 @@ const CourseEditPage = () => {
     const { id } = useParams()
     const [course, setCourse] = useState<CourseEditInterface>()
 
+    const dispatch = useDispatch()
+
     const saveCourse = async () => {
         await axios
             .put<CourseEditInterface>(`http://localhost:3000/coursesDetails/${id}`, course)
-            .then((res) => setCourse(res.data))
+            .then((res) => {
+                setCourse(res.data)
+                dispatch(addNotificationAction({ id: uuid(), title: 'Course has saved' }))
+            })
             .catch((error) => console.log(error))
     }
 

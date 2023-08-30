@@ -4,6 +4,7 @@ import { FaHome, FaLayerGroup, FaUsers, FaSignOutAlt } from 'react-icons/fa'
 
 import './Layout.scss'
 import { Link } from 'react-router-dom'
+import { RouterNames } from 'src/router'
 
 const Layout = ({ children }: PropsWithChildren) => {
     return (
@@ -17,13 +18,13 @@ const Layout = ({ children }: PropsWithChildren) => {
                     />
                 </div>
                 <ul className='layout-nav-routes'>
-                    <Link to='/' className='layout-nav-routes-item'>
+                    <Link to={RouterNames.DEFAULT} className='layout-nav-routes-item'>
                         <div className='layout-nav-routes-item-icon'>
                             <FaHome className='image' />
                         </div>
                         <span>Dashboard</span>
                     </Link>
-                    <Link to='/courses' className='layout-nav-routes-item'>
+                    <Link to={RouterNames.ALLCOURSES} className='layout-nav-routes-item'>
                         <div className='layout-nav-routes-item-icon'>
                             <FaLayerGroup className='image' />
                         </div>
