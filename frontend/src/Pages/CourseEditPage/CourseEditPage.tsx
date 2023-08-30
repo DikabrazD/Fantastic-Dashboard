@@ -5,6 +5,7 @@ import { CourseEditInterface } from './CourseEditInterface'
 import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
 import { useDispatch } from 'react-redux'
 import { addNotificationAction } from 'src/store/reducers/notificationReducer'
+import { NotificationTypes } from 'src/store/types/notification'
 
 import Breadcrumbs from 'src/Components/Breadcrumbs'
 import axios from 'axios'
@@ -31,9 +32,16 @@ const CourseEditPage = () => {
             .put<CourseEditInterface>(`http://localhost:3000/coursesDetails/${id}`, course)
             .then((res) => {
                 setCourse(res.data)
-                dispatch(addNotificationAction({ id: uuid(), title: 'Course has saved' }))
+                dispatch(
+                    addNotificationAction({ id: uuid(), title: 'Course has saved', type: NotificationTypes.GREEN })
+                )
             })
-            .catch((error) => console.log(error))
+            .catch((error) => {
+                dispatch(
+                    addNotificationAction({ id: uuid(), title: 'Something went wrong', type: NotificationTypes.RED })
+                )
+                console.log(error)
+            })
     }
 
     const changeCourse = (x: CourseEditInterface) => {

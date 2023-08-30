@@ -13,8 +13,8 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            color: black;
-            background-color: #e6ee47;
+            color: white;
+            background-color: $main-orange;
             border-radius: $border-radius;
             font-size: 14px;
             padding: 6px;
@@ -29,19 +29,13 @@
             }
         }
         &-item:nth-child(2n) {
-            background-color: #f65606;
-            .chips-list-item-image:hover {
-                color: white;
-            }
+            background-color: $main-red;
         }
         &-item:nth-child(3n) {
-            background-color: $main-green;
+            background-color: $second-green;
         }
         &-item:nth-child(4n) {
-            background-color: #b8bcc5;
-            .chips-list-item-image:hover {
-                color: red;
-            }
+            background-color: $second-gray;
         }
     }
     &-modal {

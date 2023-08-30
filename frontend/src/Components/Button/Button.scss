@@ -16,11 +16,11 @@
         height: 15px;
     }
     &-red:hover {
-        background-color: #f65606;
+        background-color: $main-red;
     }
     &-green:hover {
-        background-color: $main-green;
-        color: black;
+        background-color: $second-green;
+        color: white;
     }
     &-redSolid {
         background-color: rgba(246, 86, 6, 0.8);
