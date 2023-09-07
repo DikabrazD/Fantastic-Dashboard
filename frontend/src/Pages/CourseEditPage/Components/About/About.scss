@@ -3,12 +3,13 @@
 .about {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    &-imageTitle {
+        color: $main-green;
+        font-weight: 400;
+    }
     &-image {
         width: 400px;
         height: 300px;
-        &-title {
-            color: $main-green;
-            font-weight: 400;
-        }
     }
 }

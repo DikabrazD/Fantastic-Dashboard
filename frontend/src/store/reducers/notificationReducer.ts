@@ -4,7 +4,7 @@ const defaultState: notificationInterface[] = []
 
 export const notificationReducer = (
     state = defaultState,
-    action: { type: string; payload: notificationInterface }
+    action: { type: NotificationActionsTypes; payload: notificationInterface }
 ): notificationInterface[] => {
     switch (action.type) {
         case NotificationActionsTypes.ADD: {

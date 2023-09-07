@@ -10,6 +10,6 @@ export interface ButtonInterface {
 export enum ButtonTypes {
     RED = 'RED',
     GREEN = 'GREEN',
-    REDSOLID = 'REDSOLID',
-    GREENSOLID = 'GREENSOLID'
+    REDOUTLINED = 'REDOUTLINED',
+    GREENOUTLINED = 'GREENOUTLINED'
 }

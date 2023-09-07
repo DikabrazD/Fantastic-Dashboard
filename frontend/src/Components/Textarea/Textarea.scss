@@ -1,0 +1,21 @@
+@import '../../assets/styles/variables.scss';
+
+.textarea {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &-title {
+        color: $main-green;
+    }
+    & textarea {
+        width: 100%;
+        font-size: 15px;
+        padding: 10px;
+        color: white;
+        border-bottom: 2px solid;
+        border-color: $second-gray;
+        background-color: transparent;
+        outline: none;
+        resize: none;
+    }
+}

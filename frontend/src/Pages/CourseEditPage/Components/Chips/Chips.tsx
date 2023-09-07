@@ -48,7 +48,7 @@ const Chips = ({ value, onAdd, onDelete }: ChipsInterface) => {
             {openModal && (
                 <Modal closeModal={toggleModal}>
                     <div className='chips-modal'>
-                        <Input value={addedChip} onChange={(x) => changeAddedChip(x)} placeholder='' />
+                        <Input value={addedChip} onChange={(x) => changeAddedChip(x)} title='' />
                         <div className='chips-modal-buttons'>
                             <Button type={ButtonTypes.GREEN} text='Add' onClick={onAddChip} />
                             <Button type={ButtonTypes.RED} text='Close' onClick={toggleModal} />

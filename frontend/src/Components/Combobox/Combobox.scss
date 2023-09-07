@@ -1,0 +1,24 @@
+@import '../../assets/styles/variables.scss';
+
+.combobox {
+    width: 100%;
+    &-list {
+        font-family: monospace;
+        position: relative;
+        top: -2px;
+        border: 2px solid $second-gray;
+        height: 120px;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        &-item {
+            font-size: 14px;
+            padding: 9px;
+            cursor: pointer;
+            &:hover {
+                background-color: $second-gray;
+            }
+        }
+    }
+}

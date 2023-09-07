@@ -1,6 +1,6 @@
-import Input from 'src/Components/Input/Input'
-import Button from 'src/Components/Button/Button'
-import Sections from './Components/Sections/Sections'
+import Input from 'src/Components/Input'
+import Button from 'src/Components/Button'
+import Sections from './Components/Sections'
 import uuid from 'react-uuid'
 
 import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
@@ -55,7 +55,7 @@ const Details = ({ course, changeCourse }: ComponentDetailsInterface) => {
         <div className='details'>
             <h2 className='details-title'>
                 <span className='details-title-text'>Details</span>
-                <Button type={ButtonTypes.GREENSOLID} onClick={addDetail} text='Add' />
+                <Button type={ButtonTypes.GREENOUTLINED} onClick={addDetail} text='Add' />
             </h2>
             <div className='details-list'>
                 {course.info.details.map((item, detailIndex) => {
@@ -71,7 +71,7 @@ const Details = ({ course, changeCourse }: ComponentDetailsInterface) => {
                             <Input
                                 value={item.name}
                                 onChange={(x) => changeDetailName(detailIndex, x)}
-                                placeholder='Details name'
+                                title='Details name'
                             />
                             <Sections
                                 key={item.id}

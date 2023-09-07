@@ -1,7 +1,7 @@
 @import '../../assets/styles/variables.scss';
 
 .input {
-    &-info {
+    &-title {
         color: $main-green;
     }
 }
@@ -15,4 +15,5 @@ input[type='text'] {
     border-color: $second-gray;
     background-color: transparent;
     outline: none;
+    font-family: monospace;
 }

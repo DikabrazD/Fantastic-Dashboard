@@ -23,6 +23,7 @@ export interface CourseDetailsInterface {
 export interface CourseEditInterface extends CourseInterface {
     price: number
     number_lectures: number
+    teachers: string[]
     info: {
         main: {
             text: string

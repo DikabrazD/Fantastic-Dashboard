@@ -20,22 +20,24 @@
     }
     &-green:hover {
         background-color: $second-green;
-        color: white;
     }
-    &-redSolid {
-        background-color: rgba(246, 86, 6, 0.8);
-        color: black;
+    &-redOutlined {
+        color: #d32f2f;
+        border: 1px solid #d32f2f80;
     }
-    &-greenSolid {
-        background-color: rgba(55, 197, 195, 0.8);
-        color: black;
+    &-greenOutlined {
+        background-color: transparent;
+        border: 1px solid #2e7d3250;
+        color: #2e7d32;
     }
 
-    &-redSolid:hover {
-        background-color: #f65606;
+    &-redOutlined:hover {
+        background-color: #d32f2f10;
+        border-color: #d32f2f;
     }
-    &-greenSolid:hover {
-        background-color: $main-green;
+    &-greenOutlined:hover {
+        background-color: #2e7d3210;
+        border-color: #2e7d32;
     }
     &:hover {
         cursor: pointer;

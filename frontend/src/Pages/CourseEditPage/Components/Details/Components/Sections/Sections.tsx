@@ -1,4 +1,4 @@
-import Input from 'src/Components/Input/Input'
+import Textarea from 'src/Components/Textarea/Textarea'
 import Chips from '../../../Chips/Chips'
 import Button from 'src/Components/Button/Button'
 import Modal from 'src/Components/Modal/Modal'
@@ -95,10 +95,10 @@ const Section = ({ detailIndex, course, changeCourse }: SectionInterface) => {
                 return (
                     <div className='sectionDetail-wrapper' key={sectionIndex}>
                         {item.type === 'text' ? (
-                            <Input
+                            <Textarea
                                 value={item.text}
                                 onChange={(x) => changeSectionText(sectionIndex, x)}
-                                placeholder='Section text'
+                                title='Text'
                             />
                         ) : (
                             <div className='sectionDetail-wrapper-skills'>
@@ -123,12 +123,12 @@ const Section = ({ detailIndex, course, changeCourse }: SectionInterface) => {
                                     <p className='sectionDetail-modal-text'>Choose the type of section</p>
                                     <div className='sectionDetail-modal-buttons'>
                                         <Button
-                                            type={ButtonTypes.GREENSOLID}
+                                            type={ButtonTypes.GREENOUTLINED}
                                             onClick={() => addSection('text')}
                                             text='Text'
                                         />
                                         <Button
-                                            type={ButtonTypes.REDSOLID}
+                                            type={ButtonTypes.REDOUTLINED}
                                             onClick={() => addSection('skills')}
                                             text='Skills'
                                         />
