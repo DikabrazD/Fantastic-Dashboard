@@ -1,6 +1,6 @@
 import Input from 'src/Components/Input'
 import Button from 'src/Components/Button'
-import Sections from './Components/Sections'
+import Sections from './Sections'
 import uuid from 'react-uuid'
 
 import { ButtonTypes } from 'src/Components/Button/ButtonInterface'

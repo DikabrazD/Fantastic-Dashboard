@@ -1,0 +1,56 @@
+@import '../../../../../assets/styles/variables.scss';
+
+.mainTeachers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &-wrapper {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        &-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: calc(25% - 10px);
+            padding: 5px;
+            &-overlay {
+                cursor: pointer;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                transition: background-color 0.1s;
+                border-radius: $border-radius;
+                &:hover {
+                    background-color: #49464680;
+                }
+                &-deleteButton {
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    top: 5px;
+                    right: 5px;
+                    width: 20px;
+                    height: 20px;
+                    color: white;
+                    opacity: 1;
+                    transition: color 0.1s;
+                    &:hover {
+                        color: $main-red;
+                    }
+                }
+            }
+            &-image {
+                border-radius: $border-radius;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

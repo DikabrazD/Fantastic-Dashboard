@@ -2,7 +2,7 @@ import { InputInterface } from './InputInterface'
 
 import './Input.scss'
 
-const Input = ({ value, onChange, title }: InputInterface) => {
+const Input = ({ value, title, onChange, onClick }: InputInterface) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
 
@@ -10,7 +10,7 @@ const Input = ({ value, onChange, title }: InputInterface) => {
     }
 
     return (
-        <label className='input'>
+        <label className='input' onClick={onClick}>
             <span className='input-title'>{title}</span>
             <input type='text' onChange={(e) => handleChange(e)} value={value} />
         </label>

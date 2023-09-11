@@ -14,7 +14,7 @@ interface SkillsInterface {
 
 export type Section = SkillsInterface | TextInterface
 
-export interface CourseDetailsInterface {
+interface DetailsInterface {
     id: string
     name: string
     sections: Section[]
@@ -29,6 +29,6 @@ export interface CourseEditInterface extends CourseInterface {
             text: string
             skills: string[]
         }
-        details: CourseDetailsInterface[]
+        details: DetailsInterface[]
     }
 }

@@ -1,42 +1,57 @@
 import Input from '../Input/Input'
 
-import { useState, useEffect } from 'react'
-import { ComboboxInterface } from './ComboboxInterface'
+import { useState, useEffect, useRef } from 'react'
+import { ComboboxInterface, ComboboxItem } from './ComboboxInterface'
 
 import './Combobox.scss'
 
-const Combobox = ({ data }: ComboboxInterface) => {
+const Combobox = ({ data, onSelect }: ComboboxInterface) => {
     const [selected, setSelected] = useState<string>('')
+    const [isVisibleList, setIsVisibleList] = useState<boolean>(false)
+    const wrapperRef = useRef<HTMLDivElement>(null)
 
-    const onSelectItem = (x: string) => {
-        setSelected(x)
+    const toggleShowList = () => {
+        setIsVisibleList(!isVisibleList)
+    }
+
+    const hideList = () => {
+        setIsVisibleList(false)
+    }
+
+    const onSelectItem = (x: ComboboxItem) => {
+        setSelected(x.name)
+        onSelect(x)
+        hideList()
     }
 
     useEffect(() => {
-        if (data.length) {
-            setSelected(data[0].name)
+        const handleClickOutside = (event: MouseEvent) => {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+                hideList()
+            }
         }
-    }, [data])
+        //Add event listener to outside click
+        window.addEventListener('mousedown', handleClickOutside)
+
+        return () => {
+            window.removeEventListener('mousedown', handleClickOutside)
+        }
+        // eslint-disable-next-line
+    }, [])
 
     return (
-        <div className='combobox'>
-            {data.length && (
-                <>
-                    <Input value={selected} onChange={() => {}} title='Combobox' />
-                    <ul className='combobox-list'>
-                        {data.map((item) => {
-                            return (
-                                <li
-                                    key={item.id}
-                                    className='combobox-list-item'
-                                    onClick={() => onSelectItem(item.name)}
-                                >
-                                    {item.name}
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </>
+        <div className='combobox' ref={wrapperRef}>
+            <Input value={selected} title='Combobox' onChange={() => {}} onClick={toggleShowList} />
+            {data.length && isVisibleList && (
+                <ul className='combobox-list'>
+                    {data.map((item) => {
+                        return (
+                            <li key={item.id} className='combobox-list-item' onClick={() => onSelectItem(item)}>
+                                {item.name}
+                            </li>
+                        )
+                    })}
+                </ul>
             )}
         </div>
     )

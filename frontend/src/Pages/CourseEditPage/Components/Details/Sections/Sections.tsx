@@ -1,5 +1,5 @@
 import Textarea from 'src/Components/Textarea/Textarea'
-import Chips from '../../../Chips/Chips'
+import Chips from '../../Chips/Chips'
 import Button from 'src/Components/Button/Button'
 import Modal from 'src/Components/Modal/Modal'
 import uuid from 'react-uuid'
