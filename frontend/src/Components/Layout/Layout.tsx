@@ -24,13 +24,13 @@ const Layout = ({ children }: PropsWithChildren) => {
                         </div>
                         <span>Dashboard</span>
                     </Link>
-                    <Link to={RouterNames.ALLCOURSES} className='layout-nav-routes-item'>
+                    <Link to={RouterNames.COURSES} className='layout-nav-routes-item'>
                         <div className='layout-nav-routes-item-icon'>
                             <FaLayerGroup className='image' />
                         </div>
                         <span>Courses</span>
                     </Link>
-                    <Link to='/workers' className='layout-nav-routes-item'>
+                    <Link to={RouterNames.WORKERS} className='layout-nav-routes-item'>
                         <div className='layout-nav-routes-item-icon'>
                             <FaUsers className='image' />
                         </div>

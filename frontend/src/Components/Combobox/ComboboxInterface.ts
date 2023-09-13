@@ -5,5 +5,6 @@ export type ComboboxItem = {
 
 export interface ComboboxInterface {
     data: ComboboxItem[]
+    name: string
     onSelect: (x: ComboboxItem) => void
 }

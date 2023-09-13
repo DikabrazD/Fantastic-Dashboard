@@ -1,5 +1,5 @@
 import Textarea from 'src/Components/Textarea'
-import Chips from '../Chips'
+import Chips from '../../../../Components/Chips'
 import MainTeachers from './MainTeachers/MainTeachers'
 
 import { MainComponentInterface } from './MainInterface'

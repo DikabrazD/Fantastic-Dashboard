@@ -5,7 +5,7 @@ import { ComboboxInterface, ComboboxItem } from './ComboboxInterface'
 
 import './Combobox.scss'
 
-const Combobox = ({ data, onSelect }: ComboboxInterface) => {
+const Combobox = ({ data, name, onSelect }: ComboboxInterface) => {
     const [selected, setSelected] = useState<string>('')
     const [isVisibleList, setIsVisibleList] = useState<boolean>(false)
     const wrapperRef = useRef<HTMLDivElement>(null)
@@ -41,7 +41,7 @@ const Combobox = ({ data, onSelect }: ComboboxInterface) => {
 
     return (
         <div className='combobox' ref={wrapperRef}>
-            <Input value={selected} title='Combobox' onChange={() => {}} onClick={toggleShowList} />
+            <Input value={selected} title={name} onChange={() => {}} onClick={toggleShowList} />
             {data.length && isVisibleList && (
                 <ul className='combobox-list'>
                     {data.map((item) => {

@@ -8,7 +8,7 @@ import './CoursesPage.scss'
 const CoursesPage = () => {
     return (
         <div>
-            <Breadcrumbs text='Courses' link={RouterNames.ALLCOURSES} />
+            <Breadcrumbs text='Courses' link={RouterNames.COURSES} />
             <Categories />
         </div>
     )

@@ -67,13 +67,7 @@
                             {
                                 "id": 1,
                                 "type": "skills",
-                                "skills": [
-                                    "alfabetul",
-                                    "numerele",
-                                    "țările",
-                                    "formulele de salut",
-                                    "cuvintele simple, etc"
-                                ]
+                                "skills": []
                             },
                             {
                                 "id": 2,
@@ -118,7 +112,7 @@
         {
             "id": "64a45eb03eb0702273351bce",
             "name": "Elena",
-            "courses": ["0", "1", "2"],
+            "courses": ["64a45eb03eb0702273351bce", "64a45eb03eb0702273351bc1", "2"],
             "description": "Licențiată în științe ale Educației, Limba și Literatura Engleză & Limba Franceză. Profesor cu o experiență de predare la peste 300 de studenți de diferite vârste.",
             "img": "https://fantastic-english.md/wp-content/uploads/2021/04/Eliza_result-2.webp",
             "imgKid": "https://fantastic-english.md/wp-content/uploads/2021/04/Eliza-KID_result-2.webp"

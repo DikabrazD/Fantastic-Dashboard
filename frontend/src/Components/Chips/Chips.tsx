@@ -9,7 +9,7 @@ import Modal from 'src/Components/Modal/Modal'
 import './Chips.scss'
 import Input from 'src/Components/Input/Input'
 
-const Chips = ({ value, onAdd, onDelete }: ChipsInterface) => {
+const Chips = ({ value, onAdd, onDelete, addAndDelete = true, title = 'Skills' }: ChipsInterface) => {
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [addedChip, setAddedChips] = useState<string>('')
 
@@ -22,28 +22,36 @@ const Chips = ({ value, onAdd, onDelete }: ChipsInterface) => {
     }
 
     const onAddChip = () => {
-        if (addedChip) {
+        if (addedChip && onAdd) {
             toggleModal()
             onAdd(addedChip)
             setAddedChips('')
         }
     }
 
+    const onDeleteChip = (index: number) => {
+        if (onDelete) onDelete(index)
+    }
+
     return (
         <div className='chips'>
-            <h2 className='chips-title'>Skills</h2>
+            {title && <h2 className='chips-title'>{title}</h2>}
             <ul className='chips-list'>
                 {value.map((item, index) => {
                     return (
                         <li className='chips-list-item' key={index}>
                             <span className='chips-list-item-text'>{item}</span>
-                            <div className='chips-list-item-image' onClick={() => onDelete(index)}>
-                                <FaTimes className='image' />
-                            </div>
+                            {addAndDelete && (
+                                <div className='chips-list-item-image' onClick={() => onDeleteChip(index)}>
+                                    <FaTimes className='image' />
+                                </div>
+                            )}
                         </li>
                     )
                 })}
-                <Button type={ButtonTypes.GREEN} onClick={toggleModal} icon={<FaPlus className='image' />} />
+                {addAndDelete && (
+                    <Button type={ButtonTypes.GREEN} onClick={toggleModal} icon={<FaPlus className='image' />} />
+                )}
             </ul>
             {openModal && (
                 <Modal closeModal={toggleModal}>

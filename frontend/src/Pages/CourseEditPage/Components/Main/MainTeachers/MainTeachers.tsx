@@ -64,6 +64,7 @@ const MainTeachers = ({ course, changeCourse }: MainTeachersInterface) => {
                 <Modal closeModal={toogleModal}>
                     <Combobox
                         data={teachers.filter((item) => !course.teachers.includes(item.id))}
+                        name='Choose the teacher'
                         onSelect={(x) => setSelectedItem(x.id)}
                     />
                     <Button type={ButtonTypes.GREENOUTLINED} onClick={addTeacher} text='Add' />
