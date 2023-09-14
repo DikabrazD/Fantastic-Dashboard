@@ -23,14 +23,13 @@
         &-table {
             display: flex;
             flex-direction: column;
-            gap: 20px;
             &-header {
                 width: 100%;
                 display: flex;
                 align-items: center;
                 gap: 20px;
                 border-bottom: 1px solid $second-gray;
-                padding: 10px;
+                padding: 20px;
                 &-id {
                     width: 100px;
                     flex-shrink: 0;
@@ -60,7 +59,7 @@
                 display: flex;
                 align-items: center;
                 gap: 20px;
-                padding: 10px;
+                padding: 20px;
                 border-bottom: 1px solid $second-gray;
                 border-radius: $border-radius;
                 cursor: pointer;
@@ -115,4 +114,31 @@
             }
         }
     }
+
+    // &-addEdit {
+    //     display: flex;
+    //     flex-direction: column;
+    //     gap: 10px;
+    //     width: 500px;
+    //     & h2 {
+    //         font-size: 16px;
+    //         color: $main-green;
+    //     }
+    //     &-img {
+    //         display: flex;
+    //         width: 100px;
+    //         height: 100px;
+    //     }
+    //     &-imgKid {
+    //         display: flex;
+    //         width: 100px;
+    //         height: 100px;
+    //     }
+    //     &-actions {
+    //         display: flex;
+    //         align-items: center;
+    //         justify-content: flex-end;
+    //         gap: 10px;
+    //     }
+    // }
 }

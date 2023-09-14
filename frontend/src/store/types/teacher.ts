@@ -10,7 +10,8 @@ export interface teacherInterface {
 export enum TeacherActionsTypes {
     FETCHDATA = 'FETCHDATA',
     ADDTEACHER = 'ADDTEACHER',
-    DELETETEACHER = 'DELETETEACHER'
+    DELETETEACHER = 'DELETETEACHER',
+    EDITTEACHERACTION = 'EDITTEACHERACTION'
 }
 
 interface FetchDataAction {
@@ -23,9 +24,14 @@ interface AddTeacherAction {
     payload: teacherInterface
 }
 
+interface EditTeacherAction {
+    type: TeacherActionsTypes.EDITTEACHERACTION
+    payload: teacherInterface
+}
+
 interface DeleteTeacherAction {
     type: TeacherActionsTypes.DELETETEACHER
     payload: teacherInterface
 }
 
-export type TeacherActions = FetchDataAction | AddTeacherAction | DeleteTeacherAction
+export type TeacherActions = FetchDataAction | AddTeacherAction | EditTeacherAction | DeleteTeacherAction

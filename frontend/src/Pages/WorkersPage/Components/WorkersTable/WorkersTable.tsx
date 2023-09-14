@@ -1,19 +1,60 @@
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/store'
+import { useState } from 'react'
+import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
+import { teacherInterface } from 'src/store/types/teacher'
 
-import './WorkersTable.scss'
 import Chips from 'src/Components/Chips/Chips'
 import Button from 'src/Components/Button/Button'
-import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
+import WorkersModal from './WorkersModal/WorkersModal'
+import uuid from 'react-uuid'
+
+import './WorkersTable.scss'
 
 const WorkersTable = () => {
+    const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false)
+    const [activeWorker, setActiveWorker] = useState<teacherInterface>({
+        id: uuid(),
+        name: '',
+        courses: [],
+        description: '',
+        img: '',
+        imgKid: ''
+    })
+
     const workers = useSelector((state: RootState) => state.teachers)
+
+    const editWorker = (x: teacherInterface) => {
+        setActiveWorker(x)
+        setIsVisibleModal(true)
+    }
+
+    const addWorker = () => {
+        setActiveWorker({
+            id: '',
+            name: '',
+            courses: [],
+            description: '',
+            img: '',
+            imgKid: ''
+        })
+
+        setIsVisibleModal(true)
+    }
+
+    const closeModal = () => {
+        setIsVisibleModal(false)
+    }
+
+    const changeWorker = (x: teacherInterface) => {
+        setActiveWorker(x)
+    }
 
     return (
         <div className='workersTable'>
             <div className='workersTable-toolbar'>
                 <h2 className='workersTable-toolbar-title'>Workers Table</h2>
-                <Button type={ButtonTypes.GREEN} onClick={() => {}} text='Add worker' />
+                <Button type={ButtonTypes.GREEN} onClick={addWorker} text='Add worker' />
             </div>
             <div className='workersTable-wrapper'>
                 <ul className='workersTable-wrapper-table'>
@@ -27,7 +68,11 @@ const WorkersTable = () => {
                     </li>
                     {workers.map((item) => {
                         return (
-                            <li key={item.id} className='workersTable-wrapper-table-item'>
+                            <li
+                                key={item.id}
+                                className='workersTable-wrapper-table-item'
+                                onClick={() => editWorker(item)}
+                            >
                                 <p className='workersTable-wrapper-table-item-id'>{item.id}</p>
                                 <p className='workersTable-wrapper-table-item-name'>{item.name}</p>
                                 <div className='workersTable-wrapper-table-item-img'>
@@ -45,6 +90,10 @@ const WorkersTable = () => {
                     })}
                 </ul>
             </div>
+
+            {isVisibleModal && (
+                <WorkersModal closeModal={closeModal} activeWorker={activeWorker} changeWorker={changeWorker} />
+            )}
         </div>
     )
 }

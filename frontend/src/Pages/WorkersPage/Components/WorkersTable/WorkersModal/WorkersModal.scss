@@ -1,0 +1,28 @@
+@import '../../../../../assets/styles/variables.scss';
+
+.workersModal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+    & h2 {
+        font-size: 16px;
+        color: $main-green;
+    }
+    &-img {
+        display: flex;
+        width: 100px;
+        height: 100px;
+    }
+    &-imgKid {
+        display: flex;
+        width: 100px;
+        height: 100px;
+    }
+    &-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+}

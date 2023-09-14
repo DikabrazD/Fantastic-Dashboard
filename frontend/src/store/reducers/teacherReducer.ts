@@ -10,6 +10,15 @@ export const teacherReducer = (state = defaultState, action: TeacherActions): te
         case TeacherActionsTypes.ADDTEACHER: {
             return [...state, action.payload]
         }
+        case TeacherActionsTypes.EDITTEACHERACTION: {
+            return state.map((item) => {
+                if (item.id === action.payload.id) {
+                    return action.payload
+                } else {
+                    return item
+                }
+            })
+        }
         case TeacherActionsTypes.DELETETEACHER: {
             return state.filter((item) => item.id !== action.payload.id)
         }
@@ -25,10 +34,15 @@ export const fetchTeachersAction = (payload: teacherInterface[]) => ({
 
 export const addTeacherAction = (payload: teacherInterface) => ({
     type: TeacherActionsTypes.ADDTEACHER,
-    payloa: payload
+    payload: payload
+})
+
+export const editTeacherAction = (payload: teacherInterface) => ({
+    type: TeacherActionsTypes.EDITTEACHERACTION,
+    payload: payload
 })
 
 export const deleteTeacherAction = (payload: teacherInterface) => ({
     type: TeacherActionsTypes.DELETETEACHER,
-    payloa: payload
+    payload: payload
 })
