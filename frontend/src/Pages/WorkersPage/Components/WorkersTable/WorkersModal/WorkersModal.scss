@@ -9,15 +9,21 @@
         font-size: 16px;
         color: $main-green;
     }
-    &-img {
+    &-files {
         display: flex;
-        width: 100px;
-        height: 100px;
-    }
-    &-imgKid {
-        display: flex;
-        width: 100px;
-        height: 100px;
+        align-items: center;
+        justify-content: space-between;
+        &-item {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+            &-img {
+                display: flex;
+                width: 100px;
+                height: 100px;
+            }
+        }
     }
     &-actions {
         display: flex;

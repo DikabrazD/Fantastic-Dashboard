@@ -1,14 +1,13 @@
-import { NotificationActionsTypes, notificationInterface } from '../types/notification'
+import { NotificationActions, NotificationActionsTypes, notificationInterface } from '../types/notification'
+
+import uuid from 'react-uuid'
 
 const defaultState: notificationInterface[] = []
 
-export const notificationReducer = (
-    state = defaultState,
-    action: { type: NotificationActionsTypes; payload: notificationInterface }
-): notificationInterface[] => {
+export const notificationReducer = (state = defaultState, action: NotificationActions): notificationInterface[] => {
     switch (action.type) {
         case NotificationActionsTypes.ADD: {
-            return [...state, action.payload]
+            return [...state, { ...action.payload, id: uuid() }]
         }
         case NotificationActionsTypes.DELETE: {
             return state.filter((item) => item.id !== action.payload.id)
@@ -18,7 +17,7 @@ export const notificationReducer = (
     }
 }
 
-export const addNotificationAction = (payload: notificationInterface) => ({
+export const addNotificationAction = (payload: Omit<notificationInterface, 'id'>) => ({
     type: NotificationActionsTypes.ADD,
     payload: payload
 })

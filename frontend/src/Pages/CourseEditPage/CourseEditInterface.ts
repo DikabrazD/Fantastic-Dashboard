@@ -24,6 +24,7 @@ export interface CourseEditInterface extends CourseInterface {
     price: number
     number_lectures: number
     teachers: string[]
+    newImg?: File
     info: {
         main: {
             text: string

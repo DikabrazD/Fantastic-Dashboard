@@ -12,7 +12,7 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal'
 const Courses = ({
     category,
     categoriesChange,
-    currentCoursesChange,
+    changeCurrentCourse,
     deleteCourse,
     changeCourse,
     deleteAllCourses
@@ -67,7 +67,7 @@ const Courses = ({
     //Drag and Drop logica cursurilor
 
     const dragStartHandler = (e: React.DragEvent<HTMLLIElement>, course: CourseInterface) => {
-        currentCoursesChange(course.id)
+        changeCurrentCourse(course.id)
     }
     const dragLeaveHandler = (e: React.DragEvent<HTMLLIElement>, courseID: string) => {
         setIsOver(courseID)

@@ -13,43 +13,38 @@ import Main from './Components/Main/Main'
 import About from './Components/About/About'
 import Details from './Components/Details'
 import Button from 'src/Components/Button/Button'
-import uuid from 'react-uuid'
 
 import './CourseEditPage.scss'
 
 const CourseEditPage = () => {
     const location = useLocation()
     const navigate = useNavigate()
-    const formData = new FormData()
-
     const { id } = useParams()
-    const [course, setCourse] = useState<CourseEditInterface>()
-
     const dispatch = useDispatch()
 
+    const [course, setCourse] = useState<CourseEditInterface>()
+
     const saveCourse = async () => {
+        const formData = new FormData()
+
+        formData.append('course', JSON.stringify(course))
+
+        //Cand este gata server-side schimba course din request put cu formData pentru a citi si file-urile
+
         await axios
             .put<CourseEditInterface>(`http://localhost:3000/coursesDetails/${id}`, course)
             .then((res) => {
                 setCourse(res.data)
-                dispatch(
-                    addNotificationAction({ id: uuid(), title: 'Course has saved', type: NotificationTypes.GREEN })
-                )
+                dispatch(addNotificationAction({ title: 'Course has saved', type: NotificationTypes.GREEN }))
             })
             .catch((error) => {
-                dispatch(
-                    addNotificationAction({ id: uuid(), title: 'Something went wrong', type: NotificationTypes.RED })
-                )
+                dispatch(addNotificationAction({ title: 'Something went wrong', type: NotificationTypes.RED }))
                 console.log(error)
             })
     }
 
     const changeCourse = (x: CourseEditInterface) => {
         setCourse(x)
-    }
-
-    const changeFormData = (x: File) => {
-        formData.append('image', x)
     }
 
     useEffect(() => {
@@ -78,7 +73,7 @@ const CourseEditPage = () => {
             {course && (
                 <form className='edit-wrapper'>
                     <div className='edit-wrapper-about'>
-                        <About course={course} changeCourse={changeCourse} changeFormData={changeFormData} />
+                        <About course={course} changeCourse={changeCourse} />
                     </div>
                     <div className='edit-wrapper-main'>
                         <Main course={course} changeCourse={changeCourse} />

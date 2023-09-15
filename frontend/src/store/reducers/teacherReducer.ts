@@ -7,6 +7,9 @@ export const teacherReducer = (state = defaultState, action: TeacherActions): te
         case TeacherActionsTypes.FETCHDATA: {
             return [...action.payload]
         }
+        case TeacherActionsTypes.PUTDATA: {
+            return [...action.payload]
+        }
         case TeacherActionsTypes.ADDTEACHER: {
             return [...state, action.payload]
         }
@@ -29,6 +32,11 @@ export const teacherReducer = (state = defaultState, action: TeacherActions): te
 
 export const fetchTeachersAction = (payload: teacherInterface[]) => ({
     type: TeacherActionsTypes.FETCHDATA,
+    payload: payload
+})
+
+export const putTeachersAction = (payload: teacherInterface[]) => ({
+    type: TeacherActionsTypes.PUTDATA,
     payload: payload
 })
 

@@ -4,9 +4,11 @@ import { AboutComponentInterface } from './AboutInterface'
 import { useState } from 'react'
 
 import './About.scss'
+import InputImage from 'src/Components/InputImage/InputImage'
 
-const About = ({ course, changeCourse, changeFormData }: AboutComponentInterface) => {
+const About = ({ course, changeCourse }: AboutComponentInterface) => {
     const [selectedImage, setSelectedImage] = useState<string>('')
+
     const changeName = (x: string) => {
         if (course) changeCourse({ ...course, name: x })
     }
@@ -17,20 +19,12 @@ const About = ({ course, changeCourse, changeFormData }: AboutComponentInterface
         }
     }
 
-    const changeImage = (x: React.ChangeEvent<HTMLInputElement>) => {
-        if (x.target.files) {
-            const file = x.target.files[0]
-            const reader = new FileReader()
+    const changeSelectedImage = (x: string) => {
+        setSelectedImage(x)
+    }
 
-            reader.readAsDataURL(file)
-            reader.onload = (e) => {
-                if (e.target) {
-                    setSelectedImage(String(e.target.result))
-                }
-            }
-
-            changeFormData(file)
-        }
+    const addNewImage = (x: File) => {
+        changeCourse({ ...course, newImg: x })
     }
 
     const changeNumberLectures = (x: string) => {
@@ -46,7 +40,7 @@ const About = ({ course, changeCourse, changeFormData }: AboutComponentInterface
             <div className='about-image'>
                 <img src={selectedImage ? selectedImage : course.img} className='image' alt='course' />
             </div>
-            <input type='file' accept='image/png, image/gif, image/jpeg' onChange={changeImage} />
+            <InputImage getImage={addNewImage} getSrcImage={changeSelectedImage} />
             <Input value={course.name} onChange={(x) => changeName(x)} title='Name' />
             <Input value={course.price} onChange={(x) => changePrice(x)} title='Price' />
             <Input value={course.number_lectures} onChange={(x) => changeNumberLectures(x)} title='Number Lectures' />

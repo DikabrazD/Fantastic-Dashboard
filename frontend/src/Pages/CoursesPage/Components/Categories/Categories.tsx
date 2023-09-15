@@ -72,7 +72,8 @@ const Categories = () => {
                 const courseIndex = item.courses.indexOf(course)
                 const currentIndex = item.courses.indexOf(currentCourse)
                 //Daca in categorie nu este currentCourse  si drop-ul a fost facut peste course
-                //atunci adaugam currentCourse in fata la cela course
+                //atunci adaugam currentCourse in fata la cela course.Daca drop-ul a fost facut categorie
+                //atunci functia onDropCategoryHandler se indeplineste
                 if (currentIndex === -1) {
                     item.courses.splice(courseIndex, 0, currentCourse)
                 }
@@ -134,7 +135,7 @@ const Categories = () => {
                         <Courses
                             category={item}
                             categoriesChange={(x) => changeCategories(x, item.id)}
-                            currentCoursesChange={(x) => changeCurrentCourse(x)}
+                            changeCurrentCourse={(x) => changeCurrentCourse(x)}
                             deleteAllCourses={(x) => deleteAllCourses(x)}
                             changeCourse={(x) => changeCourse(x)}
                             deleteCourse={(x) => deleteCourse(x, item.id)}
