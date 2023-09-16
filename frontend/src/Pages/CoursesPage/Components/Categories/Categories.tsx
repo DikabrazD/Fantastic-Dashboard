@@ -37,16 +37,19 @@ const Categories = () => {
         e.preventDefault()
     }
     const onDropCategoryHandler = (e: React.DragEvent<HTMLLIElement>, categoryID: string) => {
-        let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
         //Daca facem drop peste o categorie si cuurentCourse nu se include in ea,adaugam currentCourse la urmă
-        newCategories = newCategories.map((item) => {
-            if (item.id === categoryID && currentCourse !== undefined && !item.courses.includes(currentCourse)) {
-                item.courses.push(currentCourse)
-                return item
-            } else return item
-        })
-
-        setCategories(newCategories)
+        setCategories(
+            categories.map((item) => {
+                if (item.id === categoryID && currentCourse !== undefined && !item.courses.includes(currentCourse)) {
+                    return {
+                        ...item,
+                        courses: [...item.courses, currentCourse]
+                    }
+                } else {
+                    return item
+                }
+            })
+        )
 
         e.preventDefault()
     }
@@ -64,61 +67,73 @@ const Categories = () => {
         //         console.log(err)
         //     })
 
-        let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
-        newCategories = newCategories.map((item) => {
-            // Cautam categoria in care a fost facut drop
-            if (item.id === categoryID && currentCourse !== undefined) {
-                // Cautam indexurile la cursurilor
-                const courseIndex = item.courses.indexOf(course)
-                const currentIndex = item.courses.indexOf(currentCourse)
-                //Daca in categorie nu este currentCourse  si drop-ul a fost facut peste course
-                //atunci adaugam currentCourse in fata la cela course.Daca drop-ul a fost facut categorie
-                //atunci functia onDropCategoryHandler se indeplineste
-                if (currentIndex === -1) {
-                    item.courses.splice(courseIndex, 0, currentCourse)
-                }
-                //Daca in categorie am gasit currentCourse
-                //atunci stergem currentCourse de pe index vechi si currentCourse il punem in fata course-ului
-                else {
-                    item.courses.splice(currentIndex, 1)
-                    item.courses.splice(courseIndex, 0, currentCourse)
-                }
-                return item
-            } else return item
-        })
+        setCategories(
+            categories.map((item) => {
+                // Cautam categoria in care a fost facut drop
+                if (item.id === categoryID && currentCourse !== undefined) {
+                    // Cautam indexurile la cursurilor
+                    const courseIndex = item.courses.indexOf(course)
+                    const currentIndex = item.courses.indexOf(currentCourse)
 
-        setCategories(newCategories)
+                    //Daca in categorie nu este currentCourse  si drop-ul a fost facut peste course
+                    //atunci adaugam currentCourse in fata la cela course.Daca drop-ul a fost facut categorie
+                    //atunci functia onDropCategoryHandler se indeplineste
+                    if (currentIndex === -1) {
+                        return {
+                            ...item,
+                            courses: [
+                                ...item.courses.slice(0, courseIndex),
+                                currentCourse,
+                                ...item.courses.slice(courseIndex)
+                            ]
+                        }
+                    }
+                    //Daca in categorie am gasit currentCourse
+                    else {
+                        //Stergem currentCourse de pe index vechi
+                        let newCourses = item.courses.filter((item, index) => index !== currentIndex)
+
+                        //CurrentCourse il punem in fata course-ului
+                        return {
+                            ...item,
+                            courses: [
+                                ...newCourses.slice(0, courseIndex),
+                                currentCourse,
+                                ...newCourses.slice(courseIndex)
+                            ]
+                        }
+                    }
+                } else return item
+            })
+        )
     }
+
     const deleteAllCourses = (x: string) => {
-        let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
-
-        newCategories = newCategories.map((item) => {
-            if (item.courses.includes(x)) {
-                const newItem = { ...item }
-                newItem.courses = newItem.courses.filter((item) => item !== x)
-                return newItem
-            } else return item
-        })
-
-        setCategories(newCategories)
+        setCategories(
+            categories.map((item) => {
+                if (item.courses.includes(x)) {
+                    return {
+                        ...item,
+                        courses: item.courses.filter((item) => item !== x)
+                    }
+                } else return item
+            })
+        )
     }
     const changeCourse = (course: string) => {
         navigate(generatePath(RouterNames.COURSEEDIT, { id: String(course) }))
     }
     const deleteCourse = (course: string, category: string) => {
-        let newCategories: CategoryInterface[] = JSON.parse(JSON.stringify(categories))
-
-        newCategories = newCategories.map((item) => {
-            if (item.id === category) {
-                const newItem = { ...item }
-                newItem.courses = newItem.courses.filter((item) => {
-                    return item !== course
-                })
-                return newItem
-            } else return item
-        })
-
-        setCategories(newCategories)
+        setCategories(
+            categories.map((item) => {
+                if (item.id === category) {
+                    return {
+                        ...item,
+                        courses: item.courses.filter((item) => item !== course)
+                    }
+                } else return item
+            })
+        )
     }
 
     return (
