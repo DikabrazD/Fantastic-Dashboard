@@ -5,50 +5,52 @@ import uuid from 'react-uuid'
 
 import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
 import { ComponentDetailsInterface } from './DetailsInterface'
-import { CourseEditInterface } from '../../CourseEditInterface'
 
 import './Details.scss'
 
 const Details = ({ course, changeCourse }: ComponentDetailsInterface) => {
     //Detail
-    const changeDetailName = (detailIndex: number, x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        newCourse.info.details[detailIndex].name = x
-
-        changeCourse(newCourse)
-
-        //Alternative
-        // if (course) {
-        //     setCourse({
-        //         ...course,
-        //         info: {
-        //             ...course.info,
-        //             details: course.info.details.map((item) => {
-        //                 if (item.id === '123') {
-        //                     return { ...item, name: x }
-        //                 } else return item
-        //             })
-        //         }
-        //     })
-        // }
+    const changeDetailName = (detailId: string, x: string) => {
+        if (course) {
+            changeCourse({
+                ...course,
+                info: {
+                    ...course.info,
+                    details: course.info.details.map((item) => {
+                        if (item.id === detailId) {
+                            return { ...item, name: x }
+                        } else return item
+                    })
+                }
+            })
+        }
     }
 
     const addDetail = () => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-
-        newCourse.info.details.push({
-            id: uuid(),
-            name: 'NewDetails',
-            sections: []
+        changeCourse({
+            ...course,
+            info: {
+                ...course.info,
+                details: [
+                    ...course.info.details,
+                    {
+                        id: uuid(),
+                        name: 'NewDetails',
+                        sections: []
+                    }
+                ]
+            }
         })
-
-        changeCourse(newCourse)
     }
 
-    const deleteDetail = (x: number) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        newCourse.info.details.splice(x, 1)
-        changeCourse(newCourse)
+    const deleteDetail = (x: string) => {
+        changeCourse({
+            ...course,
+            info: {
+                ...course.info,
+                details: course.info.details.filter((item) => item.id !== x)
+            }
+        })
     }
 
     return (
@@ -62,15 +64,11 @@ const Details = ({ course, changeCourse }: ComponentDetailsInterface) => {
                     return (
                         <div key={item.id} className='details-list-item'>
                             <div className='details-list-item-deleteButton'>
-                                <Button
-                                    type={ButtonTypes.RED}
-                                    onClick={() => deleteDetail(detailIndex)}
-                                    text='Delete'
-                                />
+                                <Button type={ButtonTypes.RED} onClick={() => deleteDetail(item.id)} text='Delete' />
                             </div>
                             <Input
                                 value={item.name}
-                                onChange={(x) => changeDetailName(detailIndex, x)}
+                                onChange={(x) => changeDetailName(item.id, x)}
                                 title='Details name'
                             />
                             <Sections

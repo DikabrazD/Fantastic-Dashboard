@@ -3,32 +3,27 @@ import Chips from '../../../../Components/Chips'
 import MainTeachers from './MainTeachers/MainTeachers'
 
 import { MainComponentInterface } from './MainInterface'
-import { CourseEditInterface } from '../../CourseEditInterface'
 
 import './Main.scss'
 
 const Main = ({ course, changeCourse }: MainComponentInterface) => {
     const changeMainText = (x: string) => {
-        if (course) {
-            changeCourse({ ...course, info: { ...course.info, main: { ...course.info.main, text: x } } })
-        }
-
-        //Alternative
-        // const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        // newCourse.info.main.text = x
-        // setCourse(newCourse)
+        changeCourse({ ...course, info: { ...course.info, main: { ...course.info.main, text: x } } })
     }
     const addSkill = (x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        newCourse.info.main.skills.push(x)
-
-        changeCourse(newCourse)
+        changeCourse({
+            ...course,
+            info: { ...course.info, main: { ...course.info.main, skills: [...course.info.main.skills, x] } }
+        })
     }
     const deleteSkill = (x: number) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        newCourse.info.main.skills.splice(x, 1)
-
-        changeCourse(newCourse)
+        changeCourse({
+            ...course,
+            info: {
+                ...course.info,
+                main: { ...course.info.main, skills: course.info.main.skills.filter((item, index) => index !== x) }
+            }
+        })
     }
 
     return (

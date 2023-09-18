@@ -7,11 +7,10 @@ import uuid from 'react-uuid'
 import { useState } from 'react'
 import { SectionInterface } from './SectionsInterface'
 import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
-import { CourseEditInterface } from 'src/Pages/CourseEditPage/CourseEditInterface'
 
 import './Sections.scss'
 
-const Section = ({ detailIndex, course, changeCourse }: SectionInterface) => {
+const Sections = ({ detailIndex, course, changeCourse }: SectionInterface) => {
     const [sectionModal, setSectionModal] = useState<boolean>(false)
 
     //Modal
@@ -25,94 +24,160 @@ const Section = ({ detailIndex, course, changeCourse }: SectionInterface) => {
 
     //Section
 
-    const changeSectionText = (sectionIndex: number, x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        const section = newCourse.info.details[detailIndex].sections[sectionIndex]
-
-        if (section.type === 'text') {
-            section.text = x
-        }
-
-        newCourse.info.details[detailIndex].sections[sectionIndex] = section
-        changeCourse(newCourse)
+    const changeSectionText = (sectionId: string, x: string) => {
+        changeCourse({
+            ...course,
+            info: {
+                ...course.info,
+                details: course.info.details.map((item, index) => {
+                    //Caut detalia dupa  index
+                    if (index === detailIndex) {
+                        return {
+                            ...item,
+                            sections: course.info.details[detailIndex].sections.map((sectionItem) => {
+                                //Caut sectiunea si controlez daca este de type text,si schimbam
+                                if (sectionId === sectionItem.id && sectionItem.type === 'text') {
+                                    return {
+                                        ...sectionItem,
+                                        text: x
+                                    }
+                                } else return sectionItem
+                            })
+                        }
+                    } else return item
+                })
+            }
+        })
     }
 
     const addSection = (type: 'text' | 'skills') => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-
-        if (type === 'text') {
-            newCourse.info.details[detailIndex].sections.push({
-                id: uuid(),
-                type: type,
-                text: ''
-            })
-        } else {
-            newCourse.info.details[detailIndex].sections.push({
-                id: uuid(),
-                type: type,
-                skills: []
-            })
-        }
-
-        changeCourse(newCourse)
+        changeCourse({
+            ...course,
+            info: {
+                ...course.info,
+                details: course.info.details.map((item, index) => {
+                    if (detailIndex === index) {
+                        if (type === 'text')
+                            return {
+                                ...item,
+                                sections: [
+                                    ...item.sections,
+                                    {
+                                        id: uuid(),
+                                        type: type,
+                                        text: ''
+                                    }
+                                ]
+                            }
+                        else {
+                            return {
+                                ...item,
+                                sections: [
+                                    ...item.sections,
+                                    {
+                                        id: uuid(),
+                                        type: type,
+                                        skills: []
+                                    }
+                                ]
+                            }
+                        }
+                    } else return item
+                })
+            }
+        })
     }
 
-    const deleteSection = (sectionIndex: number) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        newCourse.info.details[detailIndex].sections.splice(sectionIndex, 1)
-
-        changeCourse(newCourse)
+    const deleteSection = (sectionId: string) => {
+        changeCourse({
+            ...course,
+            info: {
+                ...course.info,
+                details: course.info.details.map((item, index) => {
+                    if (detailIndex === index) {
+                        return {
+                            ...item,
+                            sections: item.sections.filter((section) => section.id !== sectionId)
+                        }
+                    } else return item
+                })
+            }
+        })
     }
 
     //Skill
 
-    const deleteSkill = (sectionIndex: number, x: number) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        const section = newCourse.info.details[detailIndex].sections[sectionIndex]
-
-        if (section.type === 'skills') {
-            section.skills.splice(x, 1)
-        }
-
-        newCourse.info.details[detailIndex].sections[sectionIndex] = section
-        changeCourse(newCourse)
+    const deleteSkill = (sectionId: string, x: number) => {
+        changeCourse({
+            ...course,
+            info: {
+                ...course.info,
+                details: course.info.details.map((item, index) => {
+                    //Caut detalia dupa  index
+                    if (index === detailIndex) {
+                        return {
+                            ...item,
+                            sections: course.info.details[detailIndex].sections.map((sectionItem) => {
+                                //Caut sectiunea si controlez daca este de type skills si sterg skill de index-ul indicat
+                                if (sectionId === sectionItem.id && sectionItem.type === 'skills') {
+                                    return {
+                                        ...sectionItem,
+                                        skills: sectionItem.skills.filter((item, index) => index !== x)
+                                    }
+                                } else return sectionItem
+                            })
+                        }
+                    } else return item
+                })
+            }
+        })
     }
 
-    const addSkill = (sectionIndex: number, x: string) => {
-        const newCourse: CourseEditInterface = JSON.parse(JSON.stringify(course))
-        const section = newCourse.info.details[detailIndex].sections[sectionIndex]
-
-        if (section.type === 'skills') {
-            section.skills.push(x)
-        }
-
-        newCourse.info.details[detailIndex].sections[sectionIndex] = section
-        changeCourse(newCourse)
+    const addSkill = (sectionId: string, x: string) => {
+        changeCourse({
+            ...course,
+            info: {
+                ...course.info,
+                details: course.info.details.map((item, index) => {
+                    //Caut detalia dupa  index
+                    if (index === detailIndex) {
+                        return {
+                            ...item,
+                            sections: course.info.details[detailIndex].sections.map((sectionItem) => {
+                                //Caut sectiunea si controlez daca este de type skills si adaug la urma un item
+                                if (sectionId === sectionItem.id && sectionItem.type === 'skills') {
+                                    return {
+                                        ...sectionItem,
+                                        skills: [...sectionItem.skills, x]
+                                    }
+                                } else return sectionItem
+                            })
+                        }
+                    } else return item
+                })
+            }
+        })
     }
     return (
         <div className='sectionDetail'>
-            {course.info.details[detailIndex].sections.map((item, sectionIndex) => {
+            {course.info.details[detailIndex].sections.map((item) => {
                 return (
-                    <div className='sectionDetail-wrapper' key={sectionIndex}>
+                    <div className='sectionDetail-wrapper' key={item.id}>
                         {item.type === 'text' ? (
-                            <Textarea
-                                value={item.text}
-                                onChange={(x) => changeSectionText(sectionIndex, x)}
-                                title='Text'
-                            />
+                            <Textarea value={item.text} onChange={(x) => changeSectionText(item.id, x)} title='Text' />
                         ) : (
                             <div className='sectionDetail-wrapper-skills'>
                                 <Chips
                                     value={item.skills}
-                                    onAdd={(x) => addSkill(sectionIndex, x)}
-                                    onDelete={(x) => deleteSkill(sectionIndex, x)}
+                                    onAdd={(x) => addSkill(item.id, x)}
+                                    onDelete={(x) => deleteSkill(item.id, x)}
                                 />
                             </div>
                         )}
                         <div className='sectionDetail-wrapper-deleteButton'>
                             <Button
                                 type={ButtonTypes.RED}
-                                onClick={() => deleteSection(sectionIndex)}
+                                onClick={() => deleteSection(item.id)}
                                 text='Delete Section'
                             />
                         </div>
@@ -147,4 +212,4 @@ const Section = ({ detailIndex, course, changeCourse }: SectionInterface) => {
     )
 }
 
-export default Section
+export default Sections
