@@ -1,21 +1,27 @@
 import { useEffect, useState } from 'react'
+import { generatePath, useNavigate } from 'react-router-dom'
+import { RouterNames } from 'src/router'
 import { CategoryInterface } from './CategoriesInterface'
+import { ButtonTypes } from 'src/Components/Button/ButtonInterface'
+import { useDispatch } from 'react-redux'
+import { addNotificationAction } from 'src/store/reducers/notificationReducer'
+import { NotificationTypes } from 'src/store/types/notification'
 
 import axios from 'axios'
 import Courses from '../Courses/Courses'
+import Button from 'src/Components/Button/Button'
 
 import './Categories.scss'
-import { generatePath, useNavigate } from 'react-router-dom'
-import { RouterNames } from 'src/router'
 
 const Categories = () => {
     const [categories, setCategories] = useState<CategoryInterface[]>([])
     const [currentCourse, setCurrentCourse] = useState<string>()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
-        const fetchData = async () => {
-            await axios
+        const fetchData = () => {
+            axios
                 .get<CategoryInterface[]>('http://localhost:3000/categories')
                 .then((res) => {
                     setCategories(res.data)
@@ -56,17 +62,7 @@ const Categories = () => {
 
     //CRUD
 
-    const changeCategories = async (course: string, categoryID: string) => {
-        // await axios
-        //     .put<CategoryInterface[]>('http://localhost:3000/categories', x)
-        //     .then((res) => {
-        //         console.log(res.data)
-        //         setCategories(res.data)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     })
-
+    const changeCategories = (course: string, categoryID: string) => {
         setCategories(
             categories.map((item) => {
                 // Cautam categoria in care a fost facut drop
@@ -136,29 +132,45 @@ const Categories = () => {
         )
     }
 
+    const saveCourses = () => {
+        axios
+            .put<CategoryInterface[]>('http://localhost:3000/categories', categories)
+            .then(() => {
+                dispatch(addNotificationAction({ type: NotificationTypes.GREEN, title: 'Categories have been saved' }))
+            })
+            .catch(() => {
+                dispatch(addNotificationAction({ type: NotificationTypes.RED, title: 'Something went wrong' }))
+            })
+    }
+
     return (
-        <ul className='categories'>
-            {categories.map((item) => {
-                return (
-                    <li
-                        onDragOver={(e) => dragOverCategoryHandler(e)}
-                        onDrop={(e) => onDropCategoryHandler(e, item.id)}
-                        key={item.id}
-                        className='categories-item'
-                    >
-                        <h2 className='categories-item-title'>{item.name}</h2>
-                        <Courses
-                            category={item}
-                            categoriesChange={(x) => changeCategories(x, item.id)}
-                            changeCurrentCourse={(x) => changeCurrentCourse(x)}
-                            deleteAllCourses={(x) => deleteAllCourses(x)}
-                            changeCourse={(x) => changeCourse(x)}
-                            deleteCourse={(x) => deleteCourse(x, item.id)}
-                        />
-                    </li>
-                )
-            })}
-        </ul>
+        <div className='categories'>
+            <div className='categories-saveButton'>
+                <Button type={ButtonTypes.GREENOUTLINED} text='Save Courses' onClick={saveCourses} />
+            </div>
+            <ul className='categories-wrapper'>
+                {categories.map((item) => {
+                    return (
+                        <li
+                            onDragOver={(e) => dragOverCategoryHandler(e)}
+                            onDrop={(e) => onDropCategoryHandler(e, item.id)}
+                            key={item.id}
+                            className='categories-wrapper-item'
+                        >
+                            <h2 className='categories-wrapper-item-title'>{item.name}</h2>
+                            <Courses
+                                category={item}
+                                categoriesChange={(x) => changeCategories(x, item.id)}
+                                changeCurrentCourse={(x) => changeCurrentCourse(x)}
+                                deleteAllCourses={(x) => deleteAllCourses(x)}
+                                changeCourse={(x) => changeCourse(x)}
+                                deleteCourse={(x) => deleteCourse(x, item.id)}
+                            />
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
     )
 }
 

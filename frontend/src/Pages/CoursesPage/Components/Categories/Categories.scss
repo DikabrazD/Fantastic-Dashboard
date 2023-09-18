@@ -3,16 +3,24 @@
 .categories {
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    &-item {
-        color: white;
-        &-title {
-            padding: 20px;
-            margin: 10px 0;
-            border: 2px solid $main-gray;
-            border-radius: $border-radius;
-            font-size: 24px;
-            width: 100%;
+    &-saveButton {
+        align-self: flex-end;
+        margin-top: 10px;
+    }
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        &-item {
+            color: white;
+            &-title {
+                padding: 20px;
+                margin: 10px 0;
+                border: 2px solid $main-gray;
+                border-radius: $border-radius;
+                font-size: 24px;
+                width: 100%;
+            }
         }
     }
 }

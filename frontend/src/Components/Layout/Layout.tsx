@@ -18,7 +18,7 @@ const Layout = ({ children }: PropsWithChildren) => {
                     />
                 </div>
                 <ul className='layout-nav-routes'>
-                    <Link to={RouterNames.DEFAULT} className='layout-nav-routes-item'>
+                    <Link to={RouterNames.HOME} className='layout-nav-routes-item'>
                         <div className='layout-nav-routes-item-icon'>
                             <FaHome className='image' />
                         </div>
